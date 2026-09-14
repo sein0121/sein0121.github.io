@@ -1,4 +1,4 @@
-// 모바일 메뉴 토글 + 현재 페이지 nav 활성화
+// 모바일 메뉴 토글 + 현재 페이지 nav 활성화 + 섹션 스크롤 트래킹
 document.addEventListener("DOMContentLoaded", () => {
   const toggle = document.querySelector(".nav-toggle");
   const nav = document.querySelector(".site-nav");
@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 현재 파일명과 일치하는 nav 링크에 active 클래스 부여
   const current = location.pathname.split("/").pop() || "index.html";
   document.querySelectorAll(".site-nav a").forEach((link) => {
     const href = link.getAttribute("href");
@@ -21,4 +20,28 @@ document.addEventListener("DOMContentLoaded", () => {
       link.classList.add("active");
     }
   });
+
+  const pageLinks = document.querySelectorAll(".page-nav a");
+  if (!pageLinks.length) return;
+
+  const sections = Array.from(pageLinks)
+    .map((a) => document.querySelector(a.getAttribute("href")))
+    .filter(Boolean);
+
+  const setActive = (id) => {
+    pageLinks.forEach((a) =>
+      a.classList.toggle("active", a.getAttribute("href") === "#" + id)
+    );
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    },
+    { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+  );
+
+  sections.forEach((s) => observer.observe(s));
 });

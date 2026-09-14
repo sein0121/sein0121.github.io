@@ -3,141 +3,389 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>이커머스 API 서버 — 김개발</title>
+<title>PayTrip — AI 여행 정산 에이전트 · 포트폴리오</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html">kimdev<span>.</span>log</a>
-    <button class="nav-toggle" aria-label="메뉴 열기">☰</button>
+    <a class="brand" href="index.html"><span class="dot"></span>seinLee.log</a>
+    <button class="nav-toggle" aria-label="메뉴 열기">Menu</button>
     <nav class="site-nav">
       <a href="index.html">Home</a>
-      <a href="project-01.html">주문 처리 시스템</a>
-      <a href="project-02.html">실시간 알림 서버</a>
-      <a href="project-03.html">이커머스 API</a>
+      <a href="project-01.html">AIPF</a>
+      <a href="project-02.html">국민연금 AIOCR</a>
+      <a href="project-03.html">PayTrip</a>
       <a href="index.html#contact">Contact</a>
     </nav>
   </div>
 </header>
 
-<section class="project-hero">
-  <div class="wrap">
+<div class="layout-with-toc">
+<div class="page">
+
+  <header class="hero">
     <a class="back-link" href="index.html#projects">← 전체 프로젝트로</a>
-    <p class="meta-row">PROJECT 03 · 2023.06 — 2023.09 · 개인 프로젝트</p>
-    <h1>이커머스 API 서버</h1>
-    <p class="summary">상품 조회부터 장바구니, 주문, 결제까지 이어지는 커머스 도메인 전체를 설계하고 구현한 REST API 서버입니다. 설계 문서와 API 명세를 함께 관리했습니다.</p>
-    <div class="project-links">
-      <a class="tag" href="https://github.com/yourname/commerce-api" target="_blank" rel="noopener">GitHub ↗</a>
-      <a class="tag" href="#" target="_blank" rel="noopener">Swagger 문서 ↗</a>
+    <div class="eyebrow">사이드 프로젝트 · Google Cloud x Solana Foundation 해커톤</div>
+    <h1 class="title">PayTrip</h1>
+    <p class="lede">그룹 채팅과 결제 내역을 RAG로 분석해 Gemini가 인당 정산 금액을 계산하고, x402 프로토콜을 통해 Solana devnet에서 USDC 자동 송금까지 처리하는 AI 여행 정산 에이전트입니다.</p>
+    <div class="metarow">
+      <div class="metacell"><div class="k">PERIOD</div><div class="v">2026.08 – 2026.08<br>해커톤 · 사이드 프로젝트</div></div>
+      <div class="metacell"><div class="k">CONTRIBUTION</div><div class="v">3인 프로젝트<br>x402 결제 모듈·검증</div></div>
+      <div class="metacell"><div class="k">ROLE</div><div class="v">x402 사이클 구현<br>결제 API · 에이전트 연동</div></div>
+      <div class="metacell"><div class="k">STACK</div><div class="v">Python · Flask · LangGraph<br>+ Solana / Gemini</div></div>
     </div>
-  </div>
-</section>
+  </header>
 
-<div class="wrap">
-  <div class="project-body">
-    <main>
+  <section id="summary">
+    <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">프로젝트 요약</h2></div>
 
-      <div class="detail-block">
-        <h2>OVERVIEW</h2>
-        <p>실무에서 자주 마주치는 커머스 도메인을 처음부터 끝까지 직접 설계해보고 싶어 시작한 프로젝트입니다. 상품, 옵션, 재고, 장바구니, 주문, 결제 상태 관리까지 포함한 API를 구현하고, Swagger로 문서화했습니다.</p>
-      </div>
-
-      <div class="detail-block">
-        <h2>PROBLEM</h2>
-        <ul>
-          <li>상품 옵션(사이즈, 색상 등) 조합에 따른 재고 관리 로직 설계</li>
-          <li>동시에 여러 사용자가 같은 상품을 주문할 때 발생하는 재고 초과 판매 문제</li>
-          <li>주문 상태(결제 대기 → 완료 → 배송 → 취소)의 일관된 상태 전이 관리</li>
-        </ul>
-      </div>
-
-      <div class="detail-block">
-        <h2>ARCHITECTURE</h2>
-        <p>도메인을 상품, 주문, 결제 3개의 모듈로 분리하고, 계층형 구조(Controller-Service-Repository)로 설계했습니다.</p>
-        <div class="diagram-box">[Controller]
-     │
-     ▼
-[Service]  ──────▶ 비즈니스 로직 / 트랜잭션 경계
-     │
-     ▼
-[Repository (JPA)]
-     │
-     ▼
-[MySQL]
-
-* 재고 차감은 비관적 락(Pessimistic Lock)으로 동시성 제어</div>
-      </div>
-
-      <div class="detail-block">
-        <h2>KEY DECISIONS</h2>
-        <p><span class="highlight">동시 주문 시 재고 초과 판매를 어떻게 막았는가.</span> 낙관적 락으로 먼저 시도했으나 재시도 로직이 복잡해져, 재고 차감처럼 충돌 빈도가 높은 구간에는 비관적 락을 적용해 단순하고 확실하게 정합성을 보장했습니다.</p>
-        <p><span class="highlight">API 문서화를 어떻게 관리했는가.</span> Swagger(springdoc-openapi)를 도입해 코드와 문서가 어긋나지 않도록 어노테이션 기반으로 자동 생성되도록 구성했습니다.</p>
-      </div>
-
-      <div class="detail-block">
-        <h2>TROUBLESHOOTING</h2>
-        <p>비관적 락 적용 후 특정 인기 상품에 요청이 몰릴 때 응답 지연이 발생했습니다. 락 범위를 상품 전체가 아닌 옵션(재고) 단위로 좁혀 잠금 경합을 줄였고, 이후 부하 테스트에서 응답 시간이 개선된 것을 확인했습니다.</p>
-      </div>
-
-      <div class="detail-block">
-        <h2>RESULTS</h2>
-        <div class="metric-row">
-          <div class="metric">
-            <span class="value">42</span>
-            <span class="label">API 엔드포인트</span>
-          </div>
-          <div class="metric">
-            <span class="value">0건</span>
-            <span class="label">동시성 테스트 중 초과 판매</span>
-          </div>
-          <div class="metric">
-            <span class="value">90%+</span>
-            <span class="label">핵심 로직 테스트 커버리지</span>
-          </div>
+    <div class="summary-stack">
+      <div class="summary-bg">
+        <p><strong>배경.</strong> 기존의 정산 방식은 계산부터 송금 확인까지 모든 과정이 수작업으로 이루어져 막대한 마찰 비용이 발생합니다. 식당 선결제 후 여행이 끝나면 엑셀이나 계산기로 1/N을 계산하고, 영수증 캡처를 단톡방에 공유한 뒤 일대일로 대조합니다. 카드사 더치페이는 ‘계산’에 국한되고, 실제 송금과 완료 증빙은 여전히 유저의 몫입니다. 반복되는 수작업 때문에 여행의 즐거움보다 정산의 스트레스가 커지는 상황을 PayTrip이 풀고자 했습니다.</p>
+        <p>Google Cloud x Solana Foundation 해커톤에 3인으로 참여한 사이드 프로젝트입니다. 그룹 채팅과 결제 내역을 RAG로 분석해 Gemini가 인당 정산 금액을 계산하고, x402 프로토콜을 통해 Solana devnet에서 USDC 자동 송금까지 처리합니다. 계산만 하는 일반 정산 챗봇과 달리, 계산·자율 실행·온체인 검증을 한 루프로 묶는 것을 목표로 했습니다. 저는 그 중 <strong>x402 결제 사이클, 재사용 가능한 결제 모듈·API 서버, LangGraph 에이전트 결제 연동과 서명 검증</strong>을 담당했습니다.</p>
+        <div class="project-links">
+          <a class="tag" href="https://github.com/baekenough/paytrip" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="tag" href="https://paytrip-33319068113.us-central1.run.app" target="_blank" rel="noopener">Live Demo ↗</a>
         </div>
-        <p>수치는 예시입니다. 실제 테스트 커버리지 리포트(JaCoCo 등)나 API 개수 등 근거자료를 붙이면 좋습니다.</p>
       </div>
 
-    </main>
+      <div class="infopanel">
+        <div class="inforow"><div class="label">기간</div><div class="value">2026.08 (해커톤 · 사이드 프로젝트)</div></div>
+        <div class="inforow"><div class="label">인원</div><div class="value">3인 — Google Cloud x Solana Foundation 해커톤 참여</div></div>
+        <div class="inforow"><div class="label">담당 개발</div><div class="value">
+          x402 프로토콜 및 결제 실행 구간 담당<br>
+          · x402 프로토콜 전체 사이클 구현 — HTTP 402 챌린지-응답(결제 요청 → USDC 송금 → 서명 재요청 → devnet RPC 검증)을 end-to-end로 구현·검증<br>
+          · 재사용 가능한 결제 모듈, Flask 기반 x402 API 서버 구축<br>
+          · LangGraph 에이전트에서 결제 플로우 연동, 위조/정상 서명 케이스 검증, Solana Explorer 온체인 거래 증빙 확보
+        </div></div>
+      </div>
 
-    <aside class="sidebar">
-      <div class="sidebar-block">
-        <h3>TECH STACK</h3>
-        <ul>
-          <li>Java</li>
-          <li>Spring Boot</li>
-          <li>JPA / Hibernate</li>
-          <li>MySQL</li>
-          <li>Swagger</li>
-          <li>JUnit5</li>
-        </ul>
+      <div class="stackgroup">
+        <h4>Application</h4>
+        <div class="chips"><span class="chip">Python</span><span class="chip">Flask</span><span class="chip">LangGraph</span></div>
+        <h4>AI</h4>
+        <div class="chips"><span class="chip">Gemini 2.5-flash</span><span class="chip">Vertex AI</span><span class="chip">RAG</span><span class="chip">ChromaDB</span></div>
+        <h4>Payment</h4>
+        <div class="chips"><span class="chip">Solana</span><span class="chip">solders</span><span class="chip">solana-py</span><span class="chip">x402</span><span class="chip">USDC</span></div>
+        <h4>Infra</h4>
+        <div class="chips"><span class="chip">GCP</span><span class="chip">Cloud Run</span></div>
       </div>
-      <div class="sidebar-block">
-        <h3>MY ROLE</h3>
-        <ul>
-          <li>1인 개발</li>
-          <li>도메인 설계 및 전체 구현</li>
-        </ul>
+    </div>
+
+    <div class="diagram-title">마찰 비용 데이터 — 4인 그룹 여행 기준 시뮬레이션</div>
+    <div class="metric-row">
+      <div class="metric"><span class="num">11</span><span class="label">건 평균 선결제<br>AVERAGE PAYMENTS</span></div>
+      <div class="metric"><span class="num">33</span><span class="label">건 수동 송금·검증<br>MANUAL_VERIFICATION_REQUIRED</span></div>
+      <div class="metric"><span class="num">4인</span><span class="label">그룹 여행 시뮬레이션<br>DATA CONTEXT</span></div>
+    </div>
+
+    <div class="role-grid cols-3">
+      <div class="dept">
+        <h4>번거로운 절차</h4>
+        <p>식당 선결제 후 여행이 끝나면 엑셀이나 계산기로 수동 계산을 수행하는 비효율.</p>
       </div>
-    </aside>
-  </div>
+      <div class="dept">
+        <h4>증빙의 어려움</h4>
+        <p>계좌이체 후 캡처본을 단톡방에 공유하고 일대일 대조해야 하는 물리적 불편.</p>
+      </div>
+      <div class="dept">
+        <h4>기존 서비스의 한계</h4>
+        <p>카드사 더치페이는 ‘계산’에 국한되며, 실제 송금과 완료 증빙은 여전히 유저의 몫.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="architecture">
+    <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">프로젝트 구조 · 아키텍처</h2></div>
+    <p class="sec-desc">PayTrip은 단순 계산을 넘어 실제 온체인 송금과 검증까지 완결하는 자율 AI 에이전트입니다. RAG·LangGraph·x402를 결합해 <strong>인식(Perceive) → 추론(Reason) → 실행(Act) → 증빙(Prove)</strong> 루프를 구성했고, 제가 담당한 결제 구간은 HTTP 402 핸드셰이크로 “결제가 확인되어야만 정산 완료”가 되도록 붙였습니다.</p>
+
+    <div class="diagram-title">Agentic Commerce — 자율 AI 에이전트 루프</div>
+    <div class="flow">
+      <div class="flow-step"><div class="t">01 Perceive</div><div class="s">RAG · 채팅·결제 수집</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="t">02 Reason</div><div class="s">Gemini 2.5-flash 정산</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step hl"><div class="t">03 Act</div><div class="s">x402 온체인 송금</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="t">04 Prove</div><div class="s">Explorer 즉시 증빙</div></div>
+    </div>
+
+    <div class="role-grid">
+      <div class="dept">
+        <h4>일반 정산 챗봇</h4>
+        <p>단순 ‘계산’ 기능만 지원합니다. 이후 과정은 사용자가 앱을 이동하며 직접 수행해야 하는 파편화된 경험입니다.</p>
+      </div>
+      <div class="dept">
+        <h4>PayTrip Agent</h4>
+        <p>계산, 자율 실행, 온체인 검증까지 모든 과정을 하나로 완결합니다. 트랜잭션은 Solana devnet에서 Finalized되고 Explorer URL로 공개 검증됩니다.</p>
+      </div>
+    </div>
+
+    <div class="diagram-title">Architecture &amp; Workflow — RAG · LangGraph · x402</div>
+    <div class="infra">
+      <div class="infra-top"><span class="infra-badge">SYSTEM_READY · v1.0.402-BETA · Solana devnet</span></div>
+      <div class="infra-arrow-v">↕ 데이터 검색부터 온체인 실행까지</div>
+      <div class="infra-containers">
+        <div class="container-box">
+          <div class="head">01 Data — RAG / ChromaDB</div>
+          <div class="body"><span>사전 구축 지식 베이스</span><span>시뮬레이션 검색 최적화</span><span>Vector chunks 8,000+</span><span>Simulations 500 JEJU</span></div>
+        </div>
+        <div class="container-box">
+          <div class="head">02 Reasoning — LangGraph</div>
+          <div class="body"><span>Vertex AI Gemini 2.5-flash</span><span>retrieve_facts</span><span>plan_settlement</span><span>guardrail_check</span><span>execute_x402</span><span>summarize</span></div>
+        </div>
+        <div class="container-box">
+          <div class="head">03 Protocol — x402</div>
+          <div class="body"><span>REQ → 402 Required</span><span>TXN → USDC Transfer</span><span>VER → On-chain Verify</span></div>
+        </div>
+        <div class="container-box">
+          <div class="head">04 Execution — Solana</div>
+          <div class="body"><span>devnet LIVE NETWORK</span><span>Circle USDC (SPL)</span><span>Explorer Signature</span></div>
+        </div>
+      </div>
+      <div class="runtime-bar">Runtime — GCP Cloud Run · Gemini (Vertex AI)</div>
+    </div>
+
+    <div class="diagram-title">x402 핸드셰이크 — HTTP 402 챌린지-응답</div>
+    <div class="infra">
+      <div class="infra-top"><span class="infra-badge">Solana devnet · USDC SPL transfer_checked</span></div>
+      <div class="infra-arrow-v">↕ 결제 요청 · 서명 · 온체인 검증</div>
+      <div class="infra-containers">
+        <div class="container-box">
+          <div class="head">1. 결제 요청</div>
+          <div class="body"><span>GET /x402/settle</span><span>서명 없음</span><span>402 PAYMENT-REQUIRED</span></div>
+        </div>
+        <div class="container-box">
+          <div class="head">2. USDC 송금</div>
+          <div class="body"><span>solders</span><span>solana-py</span><span>devnet 전송</span></div>
+        </div>
+        <div class="container-box">
+          <div class="head">3. 서명 재요청 · 검증</div>
+          <div class="body"><span>PAYMENT-SIGNATURE</span><span>RPC get_transaction</span><span>200 settled</span></div>
+        </div>
+      </div>
+      <div class="infra-services">
+        <div class="svc-box wide">
+          <div class="head">담당 모듈</div>
+          <div class="items"><span>재사용 결제 모듈</span><span>Flask x402 API 서버</span><span>LangGraph 결제 플로우 연동</span><span>위조/정상 서명 검증</span><span>Solana Explorer 증빙</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="diagram-title">일반 정산 봇 vs PayTrip</div>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>General Bot</th>
+          <th>PayTrip (Agent)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>계산<br><span class="sub">REASONING</span></td>
+          <td>지원</td>
+          <td>지원 · Gemini 2.5-flash</td>
+        </tr>
+        <tr>
+          <td>실행<br><span class="sub">EXECUTION</span></td>
+          <td>미지원 (수동 송금)</td>
+          <td>자율 실행 · x402 + Solana</td>
+        </tr>
+        <tr>
+          <td>증빙<br><span class="sub">VERIFICATION</span></td>
+          <td>캡처본 공유</td>
+          <td>온체인 증빙 · Explorer URL (Public)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="diagram-title">Target &amp; 도입 시나리오</div>
+    <div class="role-grid">
+      <div class="dept">
+        <h4>1차 타깃 — 결제 및 카드사</h4>
+        <p>신한카드, KG이니시스, KG모빌리언스, KSNET, 다우기술 등 주요 금융/PG 인프라와 결합합니다. 카드사 앱 내에 PayTrip 에이전트 기능을 플러그인 형태로 탑재하는 것을 1단계로 둡니다.</p>
+      </div>
+      <div class="dept">
+        <h4>확장 타깃 — 글로벌 플랫폼</h4>
+        <p>글로벌 여행 플랫폼(OTA) 및 B2B SaaS 기업을 통한 생태계 확장. 여행객은 기존 방식대로 카드를 사용해 서비스를 결제합니다.</p>
+      </div>
+    </div>
+
+    <div class="phase-grid">
+      <div class="phase">
+        <div class="k">PHASE 01</div>
+        <h4>임베드</h4>
+        <p>카드사 앱 내에 PayTrip 에이전트 기능을 플러그인 형태로 탑재합니다.</p>
+      </div>
+      <div class="phase">
+        <div class="k">PHASE 02</div>
+        <h4>선결제</h4>
+        <p>여행객은 기존 방식대로 카드를 사용하여 서비스를 결제합니다.</p>
+      </div>
+      <div class="phase">
+        <div class="k">PHASE 03</div>
+        <h4>자율 정산</h4>
+        <p>앱 내 에이전트가 자동으로 1/N 정산을 계산하고 즉시 실행합니다.</p>
+      </div>
+      <div class="phase">
+        <div class="k">PHASE 04</div>
+        <h4>완료</h4>
+        <p>국경 없는 정산이 완료되며 온체인 증빙이 실시간 제공됩니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="troubleshooting">
+    <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">트러블슈팅</h2></div>
+    <p class="sec-desc">담당했던 결제 구간에서 구현·검증한 세 가지입니다.</p>
+
+    <div class="ts-card">
+      <div class="ts-head"><span class="ts-tag">x402</span><h3>HTTP 402 챌린지-응답을 송금·검증까지 한 사이클로</h3></div>
+      <div class="ts-body">
+        <div class="ts-col">
+          <div class="cl">이슈 · 원인</div>
+          <p>정산이 끝나려면 결제 요청만으로 송금을 믿으면 안 되고, USDC 전송과 서명, 체인 확인이 같은 사이클 안에서 끝나야 했습니다.</p>
+        </div>
+        <div class="ts-col">
+          <div class="cl">해결 과정</div>
+          <ul>
+            <li>결제 요청 → USDC 송금 → 서명 재요청 → devnet RPC 검증 순으로 HTTP 402 챌린지-응답을 구성</li>
+            <li>x402 프로토콜 전체 사이클을 end-to-end로 구현하고 검증</li>
+          </ul>
+        </div>
+        <div class="ts-col result">
+          <div class="cl">결과</div>
+          <ul>
+            <li>402 핸드셰이크가 온체인 검증까지 이어지는 한 흐름으로 동작함을 확인</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="ts-card">
+      <div class="ts-head"><span class="ts-tag">Payment</span><h3>재사용 가능한 결제 모듈과 x402 API 서버</h3></div>
+      <div class="ts-body">
+        <div class="ts-col">
+          <div class="cl">이슈 · 원인</div>
+          <p>에이전트 그래프 안에 송금 로직을 묻어두면 프로토콜을 따로 시연하거나 다른 경로에서 재사용하기 어려웠습니다.</p>
+        </div>
+        <div class="ts-col">
+          <div class="cl">해결 과정</div>
+          <ul>
+            <li>재사용 가능한 결제 모듈을 분리</li>
+            <li>Flask 기반 x402 API 서버를 구축해 핸드셰이크를 HTTP로 노출</li>
+          </ul>
+        </div>
+        <div class="ts-col result">
+          <div class="cl">결과</div>
+          <ul>
+            <li>결제 모듈과 API 서버를 에이전트와 독립적으로 호출·검증할 수 있게 됨</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="ts-card">
+      <div class="ts-head"><span class="ts-tag">Agent</span><h3>LangGraph 연동과 위조·정상 서명 검증</h3></div>
+      <div class="ts-body">
+        <div class="ts-col">
+          <div class="cl">이슈 · 원인</div>
+          <p>에이전트가 정산 실행 단계에서 결제를 호출할 때, 서명만 있으면 통과시키는 방식으로는 위조 서명을 걸러낼 수 없었습니다.</p>
+        </div>
+        <div class="ts-col">
+          <div class="cl">해결 과정</div>
+          <ul>
+            <li>LangGraph 에이전트에 결제 플로우를 연동</li>
+            <li>위조 서명과 정상 서명 케이스를 나눠 검증</li>
+            <li>Solana Explorer에서 온체인 거래 증빙을 확보</li>
+          </ul>
+        </div>
+        <div class="ts-col result">
+          <div class="cl">결과</div>
+          <ul>
+            <li>에이전트 실행 결과가 서명 검증과 Explorer 증빙까지 연결됨</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="achievements">
+    <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">주요 성과</h2></div>
+
+    <div class="ach-list">
+      <div class="ach-item">
+        <div class="ach-idx">01</div>
+        <div class="ach-text">
+          <p class="lead">x402 프로토콜 전체 사이클을 end-to-end로 구현·검증</p>
+          <p>HTTP 402 챌린지-응답 사이클(결제 요청 → USDC 송금 → 서명 재요청 → devnet RPC 검증)을 한 흐름으로 동작하게 만들었습니다.</p>
+        </div>
+      </div>
+      <div class="ach-item">
+        <div class="ach-idx">02</div>
+        <div class="ach-text">
+          <p class="lead">재사용 가능한 결제 모듈과 Flask x402 API 서버 구축</p>
+          <p>결제 로직을 모듈로 분리하고 Flask 기반 API 서버로 프로토콜을 노출해, 에이전트 밖에서도 같은 사이클을 호출할 수 있게 했습니다.</p>
+        </div>
+      </div>
+      <div class="ach-item">
+        <div class="ach-idx">03</div>
+        <div class="ach-text">
+          <p class="lead">에이전트 연동과 온체인 거래 증빙 확보</p>
+          <p>LangGraph 에이전트에 결제 플로우를 붙이고, 위조/정상 서명 케이스를 검증했으며 Solana Explorer로 온체인 거래 증빙을 남겼습니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="retrospective">
+    <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">회고 · 배운 점</h2></div>
+
+    <blockquote class="retro">
+      담당 범위는 x402 전체 사이클을 end-to-end로 붙이고, Flask API와 LangGraph 결제 연동에서 위조·정상 서명을 가린 뒤 Solana Explorer로 온체인 거래 증빙을 남기는 일이었습니다.
+    </blockquote>
+
+    <div class="takeaways">
+      <div class="takeaway">
+        <div class="tk-label">배움 01</div>
+        <p>x402는 상태 코드 하나가 아니라, 결제 요청 → 송금 → 서명 재요청 → RPC 검증이 끊기지 않아야 하는 프로토콜입니다. 이 사이클을 end-to-end로 붙여 본 것이 핵심이었습니다.</p>
+      </div>
+      <div class="takeaway">
+        <div class="tk-label">배움 02</div>
+        <p>결제 모듈과 API 서버를 에이전트와 분리해 두니, 프로토콜 자체와 에이전트 연동을 따로 검증할 수 있었습니다.</p>
+      </div>
+      <div class="takeaway">
+        <div class="tk-label">배움 03</div>
+        <p>위조 서명과 정상 서명을 나눠 보고, Solana Explorer로 거래를 열어보는 과정이 “보냈는가”에 대한 답을 코드 밖의 증빙으로 남기는 방법이었습니다.</p>
+      </div>
+    </div>
+  </section>
 
   <div class="project-pager">
-    <a href="project-02.html"><span class="dir">이전 프로젝트</span>← 실시간 알림 서버</a>
+    <a href="project-02.html"><span class="dir">이전 프로젝트</span>← 국민연금 AIOCR</a>
     <a href="index.html#projects"><span class="dir">전체 프로젝트</span>목록으로 돌아가기 →</a>
   </div>
+
+  <footer class="site-footer">
+    <p>본 페이지는 프로젝트 참여 경험을 바탕으로 개인이 정리한 포트폴리오입니다.</p>
+  </footer>
+
 </div>
 
-<footer class="site-footer">
-  <div class="wrap">
-    <p>© 2026 Kim Dev. Built with HTML/CSS, hosted on GitHub Pages.</p>
-  </div>
-</footer>
+<nav class="page-nav page-nav-side">
+  <a href="#summary">01 요약</a>
+  <a href="#architecture">02 구조</a>
+  <a href="#troubleshooting">03 트러블슈팅</a>
+  <a href="#achievements">04 성과</a>
+  <a href="#retrospective">05 회고</a>
+</nav>
+</div>
 
 <script src="js/main.js"></script>
 </body>

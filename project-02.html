@@ -3,137 +3,350 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>실시간 알림 서버 — 김개발</title>
+<title>국민연금 AIOCR 구축 프로젝트</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html">kimdev<span>.</span>log</a>
-    <button class="nav-toggle" aria-label="메뉴 열기">☰</button>
+    <a class="brand" href="index.html"><span class="dot"></span>seinLee.log</a>
+    <button class="nav-toggle" aria-label="메뉴 열기">Menu</button>
     <nav class="site-nav">
       <a href="index.html">Home</a>
-      <a href="project-01.html">주문 처리 시스템</a>
-      <a href="project-02.html">실시간 알림 서버</a>
-      <a href="project-03.html">이커머스 API</a>
+      <a href="project-01.html">AIPF</a>
+      <a href="project-02.html">국민연금 AIOCR</a>
+      <a href="project-03.html">PayTrip</a>
       <a href="index.html#contact">Contact</a>
     </nav>
   </div>
 </header>
 
-<section class="project-hero">
-  <div class="wrap">
+<div class="layout-with-toc">
+<div class="page">
+  <header class="hero">
     <a class="back-link" href="index.html#projects">← 전체 프로젝트로</a>
-    <p class="meta-row">PROJECT 02 · 2023.11 — 2024.01 · 개인 프로젝트</p>
-    <h1>실시간 알림 서버</h1>
-    <p class="summary">초당 수천 건의 이벤트를 받아 접속 중인 사용자에게 지연 없이 전달하는 WebSocket 기반 알림 서버를 직접 설계하고 구현했습니다.</p>
-    <div class="project-links">
-      <a class="tag" href="https://github.com/yourname/notify-server" target="_blank" rel="noopener">GitHub ↗</a>
-      <a class="tag" href="#" target="_blank" rel="noopener">Live Demo ↗</a>
+    <div class="eyebrow">국민연금공단 · 백엔드 개발 포트폴리오</div>
+    <h1 class="title">국민연금 AIOCR 구축 프로젝트</h1>
+    <p class="lede">국민연금공단의 차세대 연금 심사 시스템에 OCR 솔루션을 적용하여 문서 데이터를 자동으로 추출·가공하고, 실시간·비동기 방식의 연동 시스템을 구현했다.</p>
+    <div class="metarow">
+      <div class="metacell">
+        <div class="k">PERIOD</div>
+        <div class="v">2023.10 – 2024.02 / 2024.04 – 2024.05<br>(총 6개월)</div>
+      </div>
+      <div class="metacell">
+        <div class="k">CONTRIBUTION</div>
+        <div class="v">연동 시스템 설계·구현<br>약 70% 기여</div>
+      </div>
+      <div class="metacell">
+        <div class="k">ROLE</div>
+        <div class="v">Backend<br>실시간·배치 API 설계</div>
+      </div>
+      <div class="metacell">
+        <div class="k">STACK</div>
+        <div class="v">Spring Boot · MyBatis<br>+ Kubernetes</div>
+      </div>
     </div>
-  </div>
-</section>
+  </header>
 
-<div class="wrap">
-  <div class="project-body">
-    <main>
+  <!-- 1. 프로젝트 요약 -->
+  <section id="summary">
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <h2 class="sec-title">프로젝트 요약</h2>
+    </div>
 
-      <div class="detail-block">
-        <h2>OVERVIEW</h2>
-        <p>기존 폴링 방식(3초마다 알림 조회)은 서버 부하가 크고 실시간성이 떨어졌습니다. 이 문제를 직접 해결해보고 싶어 WebSocket 기반 알림 서버를 개인 프로젝트로 구현했습니다. 동시 접속 1만 명을 가정한 부하 테스트까지 진행했습니다.</p>
+    <div class="summary-block">
+      <div class="label">BACKGROUND</div>
+      <p>A부서(실시간 심사 문서 처리)와 B부서(과거 축적 문서 일괄 처리), 두 부서를 대상으로 AgileSoda AIOCR 엔진(TwinReader)을 실제 업무 시스템에 연동하는 중간 API 서버 2종을 설계·구현했다. OCR 엔진 자체를 개발한 것이 아니라, 문서별 분류/추출 스키마 설계부터 API 연동, 결과 가공, 배치 운영까지 문서 처리 파이프라인 전 구간을 담당했다.</p>
+    </div>
+
+    <div class="summary-block">
+      <div class="label">담당 업무 (부서별)</div>
+      <div class="role-grid role-stack">
+        <div class="dept">
+          <h4>A부서 · 실시간 연동</h4>
+          <p>수기로 입력하던 심사 항목을 AIOCR로 자동 추출·기입하는 구조로 전환. 실시간 REST API 설계, Nexacro 연동 대응, 이력 관리를 담당했다.</p>
+        </div>
+        <div class="dept">
+          <h4>B부서 · 배치 연동</h4>
+          <p>과거 축적 문서를 일괄 OCR 처리해 학습용 raw 데이터로 적재. 배치 스크립트, crontab 스케줄, 분석 트리거 API를 담당했다.</p>
+        </div>
       </div>
+    </div>
 
-      <div class="detail-block">
-        <h2>PROBLEM</h2>
-        <ul>
-          <li>폴링 방식은 사용자 수가 늘수록 서버 요청량이 선형적으로 증가</li>
-          <li>서버 재시작 시 모든 클라이언트 연결이 끊기고 재연결 폭주 발생</li>
-          <li>다중 서버 환경에서 특정 서버에 연결된 사용자에게만 메시지 전달되는 문제</li>
-        </ul>
-      </div>
-
-      <div class="detail-block">
-        <h2>ARCHITECTURE</h2>
-        <p>서버 간 메시지 브로드캐스트를 위해 Redis Pub/Sub을 도입해, 어느 서버에 연결되어 있어도 알림을 받을 수 있도록 구성했습니다.</p>
-        <div class="diagram-box">Event Source
-    │
-    ▼
-[Notify API] ──publish──▶ Redis Pub/Sub
-    │                           │
-    ▼                ┌──────────┼──────────┐
-[WS Server A]    [WS Server B]      [WS Server C]
-    │                  │                   │
- Client 1,2        Client 3            Client 4,5</div>
-      </div>
-
-      <div class="detail-block">
-        <h2>KEY DECISIONS</h2>
-        <p><span class="highlight">재연결 폭주를 어떻게 막았는가.</span> 클라이언트 재연결 로직에 지수 백오프(exponential backoff)와 지터(jitter)를 적용해, 서버 재시작 직후 동시 재연결이 몰리는 현상을 완화했습니다.</p>
-        <p><span class="highlight">왜 Socket.io 대신 순수 WebSocket을 선택했는가.</span> 폴백(polling fallback) 기능이 필요 없는 환경이었고, 메시지 포맷을 직접 제어하며 오버헤드를 최소화하고 싶어 직접 구현하는 방향을 택했습니다.</p>
-      </div>
-
-      <div class="detail-block">
-        <h2>TROUBLESHOOTING</h2>
-        <p>부하 테스트 중 동시 접속 5천 명을 넘기면서 메모리 사용량이 급증하는 현상을 발견했습니다. 프로파일링 결과 연결이 끊긴 소켓의 이벤트 리스너가 정리되지 않고 누적되는 메모리 누수였고, 연결 종료 시 리스너를 명시적으로 해제하도록 수정해 해결했습니다.</p>
-      </div>
-
-      <div class="detail-block">
-        <h2>RESULTS</h2>
-        <div class="metric-row">
-          <div class="metric">
-            <span class="value">10,000</span>
-            <span class="label">동시 접속 테스트</span>
-          </div>
-          <div class="metric">
-            <span class="value">~120ms</span>
-            <span class="label">평균 알림 전달 지연</span>
-          </div>
-          <div class="metric">
-            <span class="value">-90%</span>
-            <span class="label">서버 요청 수 (폴링 대비)</span>
+    <div class="summary-block">
+      <div class="label">사용 기술 / 툴</div>
+      <div class="stack-rows">
+        <div class="stack-row">
+          <div class="cat">Backend</div>
+          <div class="chips">
+            <span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">MyBatis</span><span class="chip">MySQL</span><span class="chip">WebFlux WebClient</span>
           </div>
         </div>
-        <p>수치는 예시입니다. 실제 부하 테스트 도구(nGrinder, k6 등)로 측정한 로그/그래프를 캡처해 첨부하면 신뢰도가 올라갑니다.</p>
+        <div class="stack-row">
+          <div class="cat">데이터 가공</div>
+          <div class="chips">
+            <span class="chip">JSON Schema</span><span class="chip">JavaScript</span>
+          </div>
+        </div>
+        <div class="stack-row">
+          <div class="cat">배치 / 운영</div>
+          <div class="chips">
+            <span class="chip">Bash Script</span><span class="chip">crontab</span><span class="chip">kubectl</span>
+          </div>
+        </div>
+        <div class="stack-row">
+          <div class="cat">인프라</div>
+          <div class="chips">
+            <span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">Ingress</span>
+          </div>
+        </div>
       </div>
+    </div>
+  </section>
 
-    </main>
+  <!-- 2. 프로젝트 구조 -->
+  <section id="architecture">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <h2 class="sec-title">프로젝트 구조 · 아키텍처</h2>
+    </div>
 
-    <aside class="sidebar">
-      <div class="sidebar-block">
-        <h3>TECH STACK</h3>
+    <p class="arch-intro">두 시스템 모두 <b style="color:var(--text)">문서 수신 → AIOCR 호출 → 결과 대기/수신(콜백) → 결과 가공 → 응답 또는 파일 저장</b>이라는 동일한 파이프라인 구조를 따르되, 부서별 요구사항에 맞춰 동기/비동기 처리 방식을 다르게 설계했다.</p>
+
+    <div class="flow-row">
+      <div class="flow-step"><div class="n">STEP 1</div><div class="t">문서 수신</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="n">STEP 2</div><div class="t">AIOCR (TwinReader) 호출</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="n">STEP 3</div><div class="t">결과 대기/수신<br>(콜백)</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="n">STEP 4</div><div class="t">결과 가공<br>(JSON/CSV)</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="n">STEP 5</div><div class="t">응답 또는<br>파일 저장</div></div>
+    </div>
+
+    <div class="dept-panel">
+      <div class="dept-panel-head">
+        <h4>A부서 — 실시간 연동 구조</h4>
+        <span>SYNC-LIKE POLLING</span>
+      </div>
+      <div class="dept-panel-body">
         <ul>
-          <li>Node.js</li>
-          <li>ws (WebSocket)</li>
-          <li>Redis Pub/Sub</li>
-          <li>Docker</li>
-          <li>k6 (부하테스트)</li>
+          <li>TwinReader는 내부적으로 비동기(콜백 기반)로 동작하지만, <b>콜백 수신 전까지 처리 상태를 폴링하며 대기</b>하는 구조로 클라이언트에는 동기 응답처럼 제공</li>
+          <li>요청 단위로 <b>중복 여부와 처리 상태를 관리</b>하고, 완료 후 결과를 재조회할 수 있는 API를 함께 구현</li>
+          <li>Nexacro 프론트엔드 연동을 위한 <b>Multipart 업로드 호환 처리</b></li>
+          <li><b>MyBatis / MySQL 기반 이력 관리</b></li>
         </ul>
       </div>
-      <div class="sidebar-block">
-        <h3>MY ROLE</h3>
+    </div>
+
+    <div class="dept-panel">
+      <div class="dept-panel-head">
+        <h4>B부서 — 배치 연동 구조</h4>
+        <span>FIRE-AND-FORGET</span>
+      </div>
+      <div class="dept-panel-body">
         <ul>
-          <li>1인 개발</li>
-          <li>설계부터 배포까지 전담</li>
+          <li>실시간 응답이 필요하지 않은 대신 대량 문서를 반복 처리해야 했기에 <b>배치 스크립트 기반의 완전 비동기(fire-and-forget) 구조</b>로 설계</li>
+          <li>문서를 일정 건수 단위로 <b>그룹핑해 순차 트리거</b>, 그룹 간 <b>대기 시간을 두어 처리 지연 누적 방지</b></li>
+          <li>처리 / 강제 종료·재기동 / 결과 전송을 <b>별도 스크립트로 분리</b>하고 crontab으로 평일·주말 스케줄을 다르게 운영</li>
+          <li>가공 결과를 <b>CSV로 변환·유형별 분류 후 내부 서버로 전송</b>하는 파이프라인까지 연결</li>
         </ul>
       </div>
-    </aside>
-  </div>
+    </div>
+  </section>
 
+  <!-- 3. 트러블슈팅 -->
+  <section id="troubleshooting">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2 class="sec-title">트러블슈팅</h2>
+    </div>
+
+    <div class="ts-item">
+      <div class="ts-head">
+        <span class="tag">A부서</span>
+        <h4>TwinReader의 비동기 콜백 구조 때문에, 실시간성이 필요한 화면에서 즉시 응답이 불가능했다</h4>
+      </div>
+      <div class="ts-body">
+        <div class="ts-col">
+          <div class="k">원인</div>
+          <p>OCR 분석 결과가 콜백으로 비동기 전달되는 구조라, 요청-응답 한 사이클 안에서 결과를 바로 돌려줄 수 없었음</p>
+        </div>
+        <div class="ts-col">
+          <div class="k">해결 과정</div>
+          <p>콜백 수신 전까지 처리 상태를 폴링하며 대기하는 구조를 구현하고, 요청 단위 중복·상태 관리와 재조회 API를 함께 설계</p>
+        </div>
+        <div class="ts-col result">
+          <div class="k">결과</div>
+          <p>클라이언트 입장에서는 동기 응답처럼 실시간 심사 화면에 결과를 반영할 수 있게 됨</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ts-item">
+      <div class="ts-head">
+        <span class="tag">B부서</span>
+        <h4>대량 문서 그룹을 쉬지 않고 연속 호출하면 처리가 누적되며 오류가 발생했다</h4>
+      </div>
+      <div class="ts-body">
+        <div class="ts-col">
+          <div class="k">원인</div>
+          <p>반복 배치 호출 시 이전 그룹의 처리가 끝나기 전에 다음 그룹이 트리거되어 지연이 누적되는 구조적 위험</p>
+        </div>
+        <div class="ts-col">
+          <div class="k">해결 과정</div>
+          <p>문서를 일정 건수 단위로 그룹핑하고, 그룹 간 대기 시간을 둔 배치 간격을 직접 설계. 처리/재기동/결과전송을 스크립트로 분리해 crontab으로 스케줄링</p>
+        </div>
+        <div class="ts-col result">
+          <div class="k">결과</div>
+          <p>대량 문서 처리 시 발생하던 지연 누적 오류를 완화</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ts-item">
+      <div class="ts-head">
+        <span class="tag">A부서</span>
+        <h4>Nexacro 프론트엔드에서 표준 Multipart 업로드가 정상 동작하지 않았다</h4>
+      </div>
+      <div class="ts-body">
+        <div class="ts-col">
+          <div class="k">원인</div>
+          <p>A부서가 사용하는 Nexacro 프론트엔드의 요청 방식이 표준적인 Spring Multipart 처리 방식과 호환되지 않음</p>
+        </div>
+        <div class="ts-col">
+          <div class="k">해결 과정</div>
+          <p>호환성 문제의 원인을 분석하고 이를 처리할 수 있도록 서버 측 업로드 처리 로직을 조정</p>
+        </div>
+        <div class="ts-col result">
+          <div class="k">결과</div>
+          <p>Nexacro 환경에서도 정상적으로 문서 업로드·연동이 가능해짐</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ts-item">
+      <div class="ts-head">
+        <span class="tag">공통</span>
+        <h4>TwinReader 내부 포맷(JSON) 결과를 부서가 실제로 쓸 수 있는 형태로 바꿔야 했다</h4>
+      </div>
+      <div class="ts-body">
+        <div class="ts-col">
+          <div class="k">원인</div>
+          <p>OCR 결과가 TwinReader 내부 포맷으로 반환되어, 불필요한 메타데이터가 섞여 있고 부서별로 필요한 항목도 서로 달랐음</p>
+        </div>
+        <div class="ts-col">
+          <div class="k">해결 과정</div>
+          <p>부서별 문서 종류·요구 항목을 분석해 JSON 기반 분류/추출 스키마를 설계하고, 불필요한 메타데이터를 제거·재구성하는 가공 로직을 JavaScript로 구현. B부서는 최종 CSV 변환까지 파이프라인화</p>
+        </div>
+        <div class="ts-col result">
+          <div class="k">결과</div>
+          <p>정제된 JSON/CSV로 각 부서가 바로 활용 가능, 신규 문서 유형 추가 시에도 스키마 확장으로 대응 가능한 구조 확보</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 주요 성과 -->
+  <section id="outcomes">
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <h2 class="sec-title">주요 성과</h2>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric">
+        <div class="num">~95%</div>
+        <div class="desc">육안 검증(수기 대사) 기준, 두 부서 평균 추출 정확도</div>
+      </div>
+      <div class="metric">
+        <div class="num">2</div>
+        <div class="desc">설계·구현한 중간 연동 API 서버 (실시간 / 배치)</div>
+      </div>
+      <div class="metric">
+        <div class="num">6개월</div>
+        <div class="desc">전체 프로젝트 수행 기간 (2단계 진행)</div>
+      </div>
+    </div>
+
+    <ul class="outcome-list">
+      <li>
+        <span class="badge">구조</span>
+        <p><b>확장 가능한 스키마 구조 확보.</b> 부서별 요구사항에 맞춘 문서 분류/추출 스키마를 설계해, 이후 신규 문서 유형이 추가되어도 스키마 확장만으로 대응 가능한 구조를 만들었다.</p>
+      </li>
+      <li>
+        <span class="badge">정확도</span>
+        <p><b>실제 업무 대체 가능성 검증.</b> 육안 검증 기준 평균 약 95%의 추출 정확도를 확인해, AIOCR이 수기 입력을 대체할 수 있음을 데이터로 뒷받침했다.</p>
+      </li>
+      <li>
+        <span class="badge">안정성</span>
+        <p><b>대량 처리 안정화.</b> 배치 간격을 직접 설계해, 대량 문서 그룹을 연속 처리할 때 발생하던 처리 지연 누적 오류를 완화했다.</p>
+      </li>
+      <li>
+        <span class="badge">A부서</span>
+        <p><b>수기 입력 부담 절감.</b> 담당자가 문서를 보며 직접 입력하던 심사 항목을 자동 추출·기입 구조로 전환해 반복적인 수작업 부담을 줄였다.</p>
+      </li>
+      <li>
+        <span class="badge">B부서</span>
+        <p><b>모델 개발 데이터 기반 마련.</b> 과거 문서를 자동 OCR 처리해 raw 데이터로 적재하는 구조를 구축, 이후 자체 모델 개발의 학습 데이터 기반을 마련했다.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 5. 회고 -->
+  <section id="retrospective">
+    <div class="sec-head">
+      <span class="sec-num">05</span>
+      <h2 class="sec-title">회고 · 배운 점</h2>
+    </div>
+
+    <div class="retro-grid">
+      <div class="retro-card">
+        <div class="r-tag">DESIGN</div>
+        <h4>같은 엔진, 다른 두 개의 설계</h4>
+        <p>동일한 AIOCR 엔진을 연동하더라도, 부서의 업무 특성(실시간성 vs. 대량 처리)에 따라 완전히 다른 아키텍처가 필요하다는 것을 체감했다. 요구사항을 먼저 "동기적 사용자 경험이 필요한가"와 "처리량이 우선인가"로 구분해 접근한 것이 설계 방향을 잡는 데 핵심이었다.</p>
+      </div>
+      <div class="retro-card">
+        <div class="r-tag">ASYNC</div>
+        <h4>비동기 콜백을 다루는 감각</h4>
+        <p>외부 엔진의 비동기 콜백 구조를 그대로 노출하지 않고, 상태 폴링과 재조회 API로 감싸 클라이언트 경험을 단순하게 만드는 패턴을 익혔다. 이 경험은 이후 외부 시스템 연동 설계에서 반복적으로 활용하는 접근이 됐다.</p>
+      </div>
+      <div class="retro-card">
+        <div class="r-tag">OPERATIONS</div>
+        <h4>운영까지 고려한 배치 설계</h4>
+        <p>배치는 "돌아가는 것"과 "안정적으로 운영되는 것"이 다르다는 걸 배웠다. 처리/재기동/전송 스크립트를 분리하고 crontab 스케줄을 요일별로 다르게 가져간 것은, 실제 장애 상황을 가정하고 복구 단위를 최소화하기 위한 선택이었다.</p>
+      </div>
+      <div class="retro-card">
+        <div class="r-tag">SCOPE</div>
+        <h4>맡은 범위를 명확히 하기</h4>
+        <p>HTTPS 전환 등 사내 시스템 담당자와 협업이 필요했던 영역은 주도적으로 해결한 부분이 아니었다. 포트폴리오를 정리하면서, 직접 설계·구현한 영역과 협업으로 진행된 영역을 구분해 기록하는 것의 중요성도 다시 확인했다.</p>
+      </div>
+    </div>
+  </section>
   <div class="project-pager">
-    <a href="project-01.html"><span class="dir">이전 프로젝트</span>← 주문 처리 시스템</a>
-    <a href="project-03.html"><span class="dir">다음 프로젝트</span>이커머스 API →</a>
+    <a href="project-01.html"><span class="dir">이전 프로젝트</span>← AIPF 문서 ETL</a>
+    <a href="project-03.html"><span class="dir">다음 프로젝트</span>PayTrip →</a>
   </div>
+
+  <footer class="site-footer">
+    <p>본 페이지는 프로젝트 참여 경험을 바탕으로 개인이 정리한 포트폴리오이며, 실제 시스템의 상세 구현 및 코드는 사내 자산으로 별도 관리됩니다.</p>
+  </footer>
 </div>
 
-<footer class="site-footer">
-  <div class="wrap">
-    <p>© 2026 Kim Dev. Built with HTML/CSS, hosted on GitHub Pages.</p>
-  </div>
-</footer>
+<nav class="page-nav page-nav-side">
+  <a href="#summary">01 요약</a>
+  <a href="#architecture">02 구조</a>
+  <a href="#troubleshooting">03 트러블슈팅</a>
+  <a href="#outcomes">04 성과</a>
+  <a href="#retrospective">05 회고</a>
+</nav>
+</div>
 
 <script src="js/main.js"></script>
 </body>

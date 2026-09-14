@@ -3,55 +3,165 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>김개발 — Backend Developer</title>
-<meta name="description" content="백엔드 개발자 김개발의 포트폴리오. 프로젝트, 기술 스택, 경력을 소개합니다.">
+<title>이세인 — Back-End Engineer</title>
+<meta name="description" content="백엔드 엔지니어 이세인 포트폴리오. 안정적인 시스템과 AI 서비스 연동을 만듭니다.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html">kimdev<span>.</span>log</a>
-    <button class="nav-toggle" aria-label="메뉴 열기">☰</button>
+    <a class="brand" href="index.html"><span class="dot"></span>seinLee.log</a>
+    <button class="nav-toggle" aria-label="메뉴 열기">Menu</button>
     <nav class="site-nav">
       <a href="index.html">Home</a>
-      <a href="project-01.html">주문 처리 시스템</a>
-      <a href="project-02.html">실시간 알림 서버</a>
-      <a href="project-03.html">이커머스 API</a>
+      <a href="project-01.html">AIPF</a>
+      <a href="project-02.html">국민연금 AIOCR</a>
+      <a href="project-03.html">PayTrip</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
 </header>
 
+<div class="layout-with-toc">
+<div class="page-main">
+
 <section class="hero">
   <div class="wrap">
-    <p class="hero-eyebrow">BACKEND DEVELOPER</p>
-    <h1>안정적으로 동작하는 서버를<br>설계하고 만듭니다</h1>
-    <p>트래픽이 몰려도 흔들리지 않는 구조, 장애가 나도 원인을 빨리 찾을 수 있는 시스템을 고민합니다. 3년째 주문·결제 도메인의 API 서버를 설계하고 운영해왔습니다.</p>
+    <p class="hero-eyebrow">BACK-END ENGINEER</p>
+    <h1>이세인</h1>
+    <p>안정적인 시스템을 위해 모두와 소통하는 개발자입니다. 애자일소다 AgentX 3팀에서 AI 문서 자동화와 LLM 파이프라인을 백엔드로 연결하고 있습니다.</p>
     <div class="hero-links">
-      <a class="primary" href="#contact">이력서 보기</a>
-      <a href="https://github.com/yourname" target="_blank" rel="noopener">GitHub ↗</a>
-      <a href="#projects">프로젝트 보기</a>
+      <a class="primary" href="mailto:sseny0121@gmail.com">sseny0121@gmail.com</a>
+      <a href="tel:01022128791">010-2212-8791</a>
+      <a href="https://github.com/sein0121" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a>
     </div>
     <div class="stack-row">
       <span class="tag">Java</span>
       <span class="tag">Spring Boot</span>
-      <span class="tag">MySQL</span>
+      <span class="tag">Python</span>
+      <span class="tag">FastAPI</span>
       <span class="tag">Redis</span>
-      <span class="tag">Kafka</span>
+      <span class="tag">Celery</span>
       <span class="tag">Docker</span>
-      <span class="tag">AWS</span>
+      <span class="tag">Kubernetes</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">About</h2></div>
+    <div class="principles about-points">
+      <div class="principle">
+        <div class="p-label">01 — 안정적인 시스템을 만듭니다</div>
+        <ul>
+          <li>컨테이너를 Worker Pool/Queue로 분리해 병목을 줄였습니다.</li>
+          <li>Redis 기반 barrier synchronization으로 단계 간 데이터 누락 위험을 방지했습니다.</li>
+        </ul>
+      </div>
+      <div class="principle">
+        <div class="p-label">02 — AI를 서비스에 연결합니다</div>
+        <ul>
+          <li>LLM inference를 백엔드 워크플로우에 연결해 정보 추출 서비스로 구현했습니다.</li>
+          <li>LLM 호출을 병렬화하고 결과 검증·구조화 로직을 담당했습니다.</li>
+        </ul>
+      </div>
+      <div class="principle">
+        <div class="p-label">03 — 요구사항을 끝까지 책임집니다</div>
+        <ul>
+          <li>다수의 프로젝트에서 OCR 추출 정확도 약 95% 등 정량 목표를 맞추며 완료했습니다.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="experience">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">Experience</h2></div>
+    <div class="two-col">
+      <div class="about-body">
+        <div class="exp-block">
+          <h3>Work</h3>
+          <ul class="timeline">
+            <li>
+              <span class="period">2022.05 — 현재</span>
+              <span class="role">애자일소다 · AgentX 3팀 책임연구원</span>
+              <p class="desc">AI 기반 문서 자동화(AIOCR) 및 의사결정 최적화 솔루션을 제공하는 기업용 AI 솔루션 기업입니다.</p>
+              <ul class="duty-list">
+                <li>솔루션 연계 시스템 백엔드 개발</li>
+                <li>AIOCR 솔루션 내 커스터마이징 스키마 개발</li>
+                <li>고객사 요구사항 분석 및 설계, 프로젝트 전반 소통</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="exp-block">
+          <h3>Education</h3>
+          <ul class="timeline">
+            <li>
+              <span class="period">2019.03 — 2022.02 · 2023.03 — 2024.02</span>
+              <span class="role">한양여자대학교 · 학사</span>
+              <span class="org">컴퓨터정보과 전문학사(3년) / 빅데이터학과 학사</span>
+              <p class="desc">SQLD 자격증 취득 (2022.12.02)</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="skills">
+        <div class="skill-group">
+          <h4>Backend</h4>
+          <ul>
+            <li>Java / Spring Boot</li>
+            <li>Python / FastAPI</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h4>Distributed Processing</h4>
+          <ul>
+            <li>Redis</li>
+            <li>Celery</li>
+            <li>Asyncio</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h4>Database</h4>
+          <ul>
+            <li>MySQL</li>
+            <li>MariaDB</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h4>Infra</h4>
+          <ul>
+            <li>Docker</li>
+            <li>Kubernetes</li>
+            <li>Makefile</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h4>Integration</h4>
+          <ul>
+            <li>OpenAI API</li>
+            <li>내부 LLM 연동</li>
+            <li>OCR 후처리</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="section" id="projects">
   <div class="wrap">
-    <div class="section-head">
-      <h2>Projects</h2>
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2 class="sec-title">Projects</h2>
       <span class="count">03 projects</span>
     </div>
     <div class="project-grid">
@@ -59,12 +169,12 @@
       <a class="project-card" href="project-01.html">
         <span class="num">01</span>
         <div>
-          <h3>주문 처리 시스템 (MSA 전환)</h3>
-          <p>모놀리식으로 운영되던 주문 서비스를 도메인 단위로 분리하고, 이벤트 기반 구조로 전환한 프로젝트</p>
+          <h3>AIPF — 보기·납기 입력 자동화</h3>
+          <p>보험 상품 보기·납기 수기 입력을 생성형 AI ETL 파이프라인으로 자동화하고, Queue/Worker와 Redis 상태 관리로 대량 문서를 안정적으로 처리</p>
           <div class="card-tags stack-row">
-            <span class="tag">Spring Boot</span>
-            <span class="tag">Kafka</span>
-            <span class="tag">MySQL</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">Redis</span>
+            <span class="tag">LLM</span>
           </div>
         </div>
         <span class="arrow">→</span>
@@ -73,12 +183,12 @@
       <a class="project-card" href="project-02.html">
         <span class="num">02</span>
         <div>
-          <h3>실시간 알림 서버</h3>
-          <p>초당 수천 건의 이벤트를 처리해 사용자에게 실시간으로 알림을 전달하는 WebSocket 기반 서버</p>
+          <h3>국민연금 AIOCR 구축</h3>
+          <p>차세대 연금 심사 시스템에 OCR을 연동해 문서 데이터를 자동 추출·가공하고, 실시간·배치 방식의 중간 API 서버를 설계·구현</p>
           <div class="card-tags stack-row">
-            <span class="tag">Node.js</span>
-            <span class="tag">Redis</span>
-            <span class="tag">WebSocket</span>
+            <span class="tag">Spring Boot</span>
+            <span class="tag">MyBatis</span>
+            <span class="tag">Kubernetes</span>
           </div>
         </div>
         <span class="arrow">→</span>
@@ -87,12 +197,12 @@
       <a class="project-card" href="project-03.html">
         <span class="num">03</span>
         <div>
-          <h3>이커머스 API 서버</h3>
-          <p>상품, 장바구니, 결제까지 이어지는 커머스 도메인 API를 설계하고 문서화한 개인 프로젝트</p>
+          <h3>PayTrip</h3>
+          <p>그룹 채팅·결제 내역을 RAG로 분석해 인당 정산을 계산하고, x402로 Solana devnet USDC 송금까지 처리하는 AI 여행 정산 에이전트</p>
           <div class="card-tags stack-row">
-            <span class="tag">Spring Boot</span>
-            <span class="tag">JPA</span>
-            <span class="tag">Swagger</span>
+            <span class="tag">Flask</span>
+            <span class="tag">LangGraph</span>
+            <span class="tag">Solana</span>
           </div>
         </div>
         <span class="arrow">→</span>
@@ -102,62 +212,32 @@
   </div>
 </section>
 
-<section class="section" id="about">
-  <div class="wrap two-col">
-    <div class="about-body">
-      <div class="section-head"><h2>About</h2></div>
-      <p>3년차 백엔드 개발자로, 커머스·결제 도메인에서 트래픽 증가에 대응하는 구조 설계와 장애 대응 경험을 쌓아왔습니다. 성능 개선을 위해 쿼리를 뜯어보는 것과, 장애 원인을 로그로 추적하는 과정을 즐깁니다.</p>
-      <ul class="timeline">
-        <li>
-          <span class="period">2023.03 — 현재</span>
-          <span class="role">주식회사 예시컴퍼니 · 백엔드 개발자</span>
-          <p class="desc">주문/결제 서버 개발 및 운영, MSA 전환 프로젝트 리드</p>
-        </li>
-        <li>
-          <span class="period">2021.09 — 2023.02</span>
-          <span class="role">예시스타트업 · 서버 개발자</span>
-          <p class="desc">회원/상품 도메인 API 개발, 레거시 개선</p>
-        </li>
-      </ul>
-    </div>
-    <div class="skills">
-      <div class="skill-group">
-        <h4>Languages / Frameworks</h4>
-        <ul>
-          <li>Java</li><li>Kotlin</li><li>Spring Boot</li><li>Node.js</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h4>Database / Infra</h4>
-        <ul>
-          <li>MySQL</li><li>Redis</li><li>Kafka</li><li>Docker</li><li>AWS EC2</li><li>Nginx</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h4>Tools</h4>
-        <ul>
-          <li>Git</li><li>Jenkins</li><li>Grafana</li><li>Postman</li>
-        </ul>
-      </div>
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">Contact</h2></div>
+    <p class="contact-lead">편하게 메일이나 전화로 연락 주세요.</p>
+    <div class="contact-list">
+      <a href="mailto:sseny0121@gmail.com">sseny0121@gmail.com</a>
+      <a href="tel:01022128791">010-2212-8791</a>
+      <a href="https://github.com/sein0121" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a>
     </div>
   </div>
 </section>
 
-<section class="section" id="contact">
-  <div class="wrap">
-    <div class="section-head"><h2>Contact</h2></div>
-    <p style="color:var(--text-muted); max-width:56ch; margin-bottom:24px;">새로운 팀에서 함께 일할 기회를 찾고 있습니다. 편하게 연락 주세요.</p>
-    <div class="contact-list">
-      <a href="mailto:you@example.com">you@example.com</a>
-      <a href="https://github.com/yourname" target="_blank" rel="noopener">GitHub ↗</a>
-      <a href="#">이력서 PDF 다운로드 ↓</a>
-    </div>
-  </div>
-</section>
+</div>
+
+<nav class="page-nav page-nav-side">
+  <a href="#about">01 About</a>
+  <a href="#experience">02 Experience</a>
+  <a href="#projects">03 Projects</a>
+  <a href="#contact">04 Contact</a>
+</nav>
+</div>
 
 <footer class="site-footer">
   <div class="wrap">
-    <p>© 2026 Kim Dev. Built with HTML/CSS, hosted on GitHub Pages.</p>
+    <p>© 2026 이세인. Built with HTML/CSS, hosted on GitHub Pages.</p>
   </div>
 </footer>
 
