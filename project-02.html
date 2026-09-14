@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>실시간 알림 서버 — 김개발</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">kimdev<span>.</span>log</a>
+    <button class="nav-toggle" aria-label="메뉴 열기">☰</button>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="project-01.html">주문 처리 시스템</a>
+      <a href="project-02.html">실시간 알림 서버</a>
+      <a href="project-03.html">이커머스 API</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="project-hero">
+  <div class="wrap">
+    <a class="back-link" href="index.html#projects">← 전체 프로젝트로</a>
+    <p class="meta-row">PROJECT 02 · 2023.11 — 2024.01 · 개인 프로젝트</p>
+    <h1>실시간 알림 서버</h1>
+    <p class="summary">초당 수천 건의 이벤트를 받아 접속 중인 사용자에게 지연 없이 전달하는 WebSocket 기반 알림 서버를 직접 설계하고 구현했습니다.</p>
+    <div class="project-links">
+      <a class="tag" href="https://github.com/yourname/notify-server" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="tag" href="#" target="_blank" rel="noopener">Live Demo ↗</a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="project-body">
+    <main>
+
+      <div class="detail-block">
+        <h2>OVERVIEW</h2>
+        <p>기존 폴링 방식(3초마다 알림 조회)은 서버 부하가 크고 실시간성이 떨어졌습니다. 이 문제를 직접 해결해보고 싶어 WebSocket 기반 알림 서버를 개인 프로젝트로 구현했습니다. 동시 접속 1만 명을 가정한 부하 테스트까지 진행했습니다.</p>
+      </div>
+
+      <div class="detail-block">
+        <h2>PROBLEM</h2>
+        <ul>
+          <li>폴링 방식은 사용자 수가 늘수록 서버 요청량이 선형적으로 증가</li>
+          <li>서버 재시작 시 모든 클라이언트 연결이 끊기고 재연결 폭주 발생</li>
+          <li>다중 서버 환경에서 특정 서버에 연결된 사용자에게만 메시지 전달되는 문제</li>
+        </ul>
+      </div>
+
+      <div class="detail-block">
+        <h2>ARCHITECTURE</h2>
+        <p>서버 간 메시지 브로드캐스트를 위해 Redis Pub/Sub을 도입해, 어느 서버에 연결되어 있어도 알림을 받을 수 있도록 구성했습니다.</p>
+        <div class="diagram-box">Event Source
+    │
+    ▼
+[Notify API] ──publish──▶ Redis Pub/Sub
+    │                           │
+    ▼                ┌──────────┼──────────┐
+[WS Server A]    [WS Server B]      [WS Server C]
+    │                  │                   │
+ Client 1,2        Client 3            Client 4,5</div>
+      </div>
+
+      <div class="detail-block">
+        <h2>KEY DECISIONS</h2>
+        <p><span class="highlight">재연결 폭주를 어떻게 막았는가.</span> 클라이언트 재연결 로직에 지수 백오프(exponential backoff)와 지터(jitter)를 적용해, 서버 재시작 직후 동시 재연결이 몰리는 현상을 완화했습니다.</p>
+        <p><span class="highlight">왜 Socket.io 대신 순수 WebSocket을 선택했는가.</span> 폴백(polling fallback) 기능이 필요 없는 환경이었고, 메시지 포맷을 직접 제어하며 오버헤드를 최소화하고 싶어 직접 구현하는 방향을 택했습니다.</p>
+      </div>
+
+      <div class="detail-block">
+        <h2>TROUBLESHOOTING</h2>
+        <p>부하 테스트 중 동시 접속 5천 명을 넘기면서 메모리 사용량이 급증하는 현상을 발견했습니다. 프로파일링 결과 연결이 끊긴 소켓의 이벤트 리스너가 정리되지 않고 누적되는 메모리 누수였고, 연결 종료 시 리스너를 명시적으로 해제하도록 수정해 해결했습니다.</p>
+      </div>
+
+      <div class="detail-block">
+        <h2>RESULTS</h2>
+        <div class="metric-row">
+          <div class="metric">
+            <span class="value">10,000</span>
+            <span class="label">동시 접속 테스트</span>
+          </div>
+          <div class="metric">
+            <span class="value">~120ms</span>
+            <span class="label">평균 알림 전달 지연</span>
+          </div>
+          <div class="metric">
+            <span class="value">-90%</span>
+            <span class="label">서버 요청 수 (폴링 대비)</span>
+          </div>
+        </div>
+        <p>수치는 예시입니다. 실제 부하 테스트 도구(nGrinder, k6 등)로 측정한 로그/그래프를 캡처해 첨부하면 신뢰도가 올라갑니다.</p>
+      </div>
+
+    </main>
+
+    <aside class="sidebar">
+      <div class="sidebar-block">
+        <h3>TECH STACK</h3>
+        <ul>
+          <li>Node.js</li>
+          <li>ws (WebSocket)</li>
+          <li>Redis Pub/Sub</li>
+          <li>Docker</li>
+          <li>k6 (부하테스트)</li>
+        </ul>
+      </div>
+      <div class="sidebar-block">
+        <h3>MY ROLE</h3>
+        <ul>
+          <li>1인 개발</li>
+          <li>설계부터 배포까지 전담</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <div class="project-pager">
+    <a href="project-01.html"><span class="dir">이전 프로젝트</span>← 주문 처리 시스템</a>
+    <a href="project-03.html"><span class="dir">다음 프로젝트</span>이커머스 API →</a>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© 2026 Kim Dev. Built with HTML/CSS, hosted on GitHub Pages.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>김개발 — Backend Developer</title>
+<meta name="description" content="백엔드 개발자 김개발의 포트폴리오. 프로젝트, 기술 스택, 경력을 소개합니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">kimdev<span>.</span>log</a>
+    <button class="nav-toggle" aria-label="메뉴 열기">☰</button>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="project-01.html">주문 처리 시스템</a>
+      <a href="project-02.html">실시간 알림 서버</a>
+      <a href="project-03.html">이커머스 API</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="hero-eyebrow">BACKEND DEVELOPER</p>
+    <h1>안정적으로 동작하는 서버를<br>설계하고 만듭니다</h1>
+    <p>트래픽이 몰려도 흔들리지 않는 구조, 장애가 나도 원인을 빨리 찾을 수 있는 시스템을 고민합니다. 3년째 주문·결제 도메인의 API 서버를 설계하고 운영해왔습니다.</p>
+    <div class="hero-links">
+      <a class="primary" href="#contact">이력서 보기</a>
+      <a href="https://github.com/yourname" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="#projects">프로젝트 보기</a>
+    </div>
+    <div class="stack-row">
+      <span class="tag">Java</span>
+      <span class="tag">Spring Boot</span>
+      <span class="tag">MySQL</span>
+      <span class="tag">Redis</span>
+      <span class="tag">Kafka</span>
+      <span class="tag">Docker</span>
+      <span class="tag">AWS</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Projects</h2>
+      <span class="count">03 projects</span>
+    </div>
+    <div class="project-grid">
+
+      <a class="project-card" href="project-01.html">
+        <span class="num">01</span>
+        <div>
+          <h3>주문 처리 시스템 (MSA 전환)</h3>
+          <p>모놀리식으로 운영되던 주문 서비스를 도메인 단위로 분리하고, 이벤트 기반 구조로 전환한 프로젝트</p>
+          <div class="card-tags stack-row">
+            <span class="tag">Spring Boot</span>
+            <span class="tag">Kafka</span>
+            <span class="tag">MySQL</span>
+          </div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="project-card" href="project-02.html">
+        <span class="num">02</span>
+        <div>
+          <h3>실시간 알림 서버</h3>
+          <p>초당 수천 건의 이벤트를 처리해 사용자에게 실시간으로 알림을 전달하는 WebSocket 기반 서버</p>
+          <div class="card-tags stack-row">
+            <span class="tag">Node.js</span>
+            <span class="tag">Redis</span>
+            <span class="tag">WebSocket</span>
+          </div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="project-card" href="project-03.html">
+        <span class="num">03</span>
+        <div>
+          <h3>이커머스 API 서버</h3>
+          <p>상품, 장바구니, 결제까지 이어지는 커머스 도메인 API를 설계하고 문서화한 개인 프로젝트</p>
+          <div class="card-tags stack-row">
+            <span class="tag">Spring Boot</span>
+            <span class="tag">JPA</span>
+            <span class="tag">Swagger</span>
+          </div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="wrap two-col">
+    <div class="about-body">
+      <div class="section-head"><h2>About</h2></div>
+      <p>3년차 백엔드 개발자로, 커머스·결제 도메인에서 트래픽 증가에 대응하는 구조 설계와 장애 대응 경험을 쌓아왔습니다. 성능 개선을 위해 쿼리를 뜯어보는 것과, 장애 원인을 로그로 추적하는 과정을 즐깁니다.</p>
+      <ul class="timeline">
+        <li>
+          <span class="period">2023.03 — 현재</span>
+          <span class="role">주식회사 예시컴퍼니 · 백엔드 개발자</span>
+          <p class="desc">주문/결제 서버 개발 및 운영, MSA 전환 프로젝트 리드</p>
+        </li>
+        <li>
+          <span class="period">2021.09 — 2023.02</span>
+          <span class="role">예시스타트업 · 서버 개발자</span>
+          <p class="desc">회원/상품 도메인 API 개발, 레거시 개선</p>
+        </li>
+      </ul>
+    </div>
+    <div class="skills">
+      <div class="skill-group">
+        <h4>Languages / Frameworks</h4>
+        <ul>
+          <li>Java</li><li>Kotlin</li><li>Spring Boot</li><li>Node.js</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Database / Infra</h4>
+        <ul>
+          <li>MySQL</li><li>Redis</li><li>Kafka</li><li>Docker</li><li>AWS EC2</li><li>Nginx</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Tools</h4>
+        <ul>
+          <li>Git</li><li>Jenkins</li><li>Grafana</li><li>Postman</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="section-head"><h2>Contact</h2></div>
+    <p style="color:var(--text-muted); max-width:56ch; margin-bottom:24px;">새로운 팀에서 함께 일할 기회를 찾고 있습니다. 편하게 연락 주세요.</p>
+    <div class="contact-list">
+      <a href="mailto:you@example.com">you@example.com</a>
+      <a href="https://github.com/yourname" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="#">이력서 PDF 다운로드 ↓</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© 2026 Kim Dev. Built with HTML/CSS, hosted on GitHub Pages.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

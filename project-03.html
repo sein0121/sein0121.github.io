@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이커머스 API 서버 — 김개발</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">kimdev<span>.</span>log</a>
+    <button class="nav-toggle" aria-label="메뉴 열기">☰</button>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="project-01.html">주문 처리 시스템</a>
+      <a href="project-02.html">실시간 알림 서버</a>
+      <a href="project-03.html">이커머스 API</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="project-hero">
+  <div class="wrap">
+    <a class="back-link" href="index.html#projects">← 전체 프로젝트로</a>
+    <p class="meta-row">PROJECT 03 · 2023.06 — 2023.09 · 개인 프로젝트</p>
+    <h1>이커머스 API 서버</h1>
+    <p class="summary">상품 조회부터 장바구니, 주문, 결제까지 이어지는 커머스 도메인 전체를 설계하고 구현한 REST API 서버입니다. 설계 문서와 API 명세를 함께 관리했습니다.</p>
+    <div class="project-links">
+      <a class="tag" href="https://github.com/yourname/commerce-api" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="tag" href="#" target="_blank" rel="noopener">Swagger 문서 ↗</a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="project-body">
+    <main>
+
+      <div class="detail-block">
+        <h2>OVERVIEW</h2>
+        <p>실무에서 자주 마주치는 커머스 도메인을 처음부터 끝까지 직접 설계해보고 싶어 시작한 프로젝트입니다. 상품, 옵션, 재고, 장바구니, 주문, 결제 상태 관리까지 포함한 API를 구현하고, Swagger로 문서화했습니다.</p>
+      </div>
+
+      <div class="detail-block">
+        <h2>PROBLEM</h2>
+        <ul>
+          <li>상품 옵션(사이즈, 색상 등) 조합에 따른 재고 관리 로직 설계</li>
+          <li>동시에 여러 사용자가 같은 상품을 주문할 때 발생하는 재고 초과 판매 문제</li>
+          <li>주문 상태(결제 대기 → 완료 → 배송 → 취소)의 일관된 상태 전이 관리</li>
+        </ul>
+      </div>
+
+      <div class="detail-block">
+        <h2>ARCHITECTURE</h2>
+        <p>도메인을 상품, 주문, 결제 3개의 모듈로 분리하고, 계층형 구조(Controller-Service-Repository)로 설계했습니다.</p>
+        <div class="diagram-box">[Controller]
+     │
+     ▼
+[Service]  ──────▶ 비즈니스 로직 / 트랜잭션 경계
+     │
+     ▼
+[Repository (JPA)]
+     │
+     ▼
+[MySQL]
+
+* 재고 차감은 비관적 락(Pessimistic Lock)으로 동시성 제어</div>
+      </div>
+
+      <div class="detail-block">
+        <h2>KEY DECISIONS</h2>
+        <p><span class="highlight">동시 주문 시 재고 초과 판매를 어떻게 막았는가.</span> 낙관적 락으로 먼저 시도했으나 재시도 로직이 복잡해져, 재고 차감처럼 충돌 빈도가 높은 구간에는 비관적 락을 적용해 단순하고 확실하게 정합성을 보장했습니다.</p>
+        <p><span class="highlight">API 문서화를 어떻게 관리했는가.</span> Swagger(springdoc-openapi)를 도입해 코드와 문서가 어긋나지 않도록 어노테이션 기반으로 자동 생성되도록 구성했습니다.</p>
+      </div>
+
+      <div class="detail-block">
+        <h2>TROUBLESHOOTING</h2>
+        <p>비관적 락 적용 후 특정 인기 상품에 요청이 몰릴 때 응답 지연이 발생했습니다. 락 범위를 상품 전체가 아닌 옵션(재고) 단위로 좁혀 잠금 경합을 줄였고, 이후 부하 테스트에서 응답 시간이 개선된 것을 확인했습니다.</p>
+      </div>
+
+      <div class="detail-block">
+        <h2>RESULTS</h2>
+        <div class="metric-row">
+          <div class="metric">
+            <span class="value">42</span>
+            <span class="label">API 엔드포인트</span>
+          </div>
+          <div class="metric">
+            <span class="value">0건</span>
+            <span class="label">동시성 테스트 중 초과 판매</span>
+          </div>
+          <div class="metric">
+            <span class="value">90%+</span>
+            <span class="label">핵심 로직 테스트 커버리지</span>
+          </div>
+        </div>
+        <p>수치는 예시입니다. 실제 테스트 커버리지 리포트(JaCoCo 등)나 API 개수 등 근거자료를 붙이면 좋습니다.</p>
+      </div>
+
+    </main>
+
+    <aside class="sidebar">
+      <div class="sidebar-block">
+        <h3>TECH STACK</h3>
+        <ul>
+          <li>Java</li>
+          <li>Spring Boot</li>
+          <li>JPA / Hibernate</li>
+          <li>MySQL</li>
+          <li>Swagger</li>
+          <li>JUnit5</li>
+        </ul>
+      </div>
+      <div class="sidebar-block">
+        <h3>MY ROLE</h3>
+        <ul>
+          <li>1인 개발</li>
+          <li>도메인 설계 및 전체 구현</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <div class="project-pager">
+    <a href="project-02.html"><span class="dir">이전 프로젝트</span>← 실시간 알림 서버</a>
+    <a href="index.html#projects"><span class="dir">전체 프로젝트</span>목록으로 돌아가기 →</a>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© 2026 Kim Dev. Built with HTML/CSS, hosted on GitHub Pages.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
