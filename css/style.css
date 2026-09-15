@@ -919,19 +919,36 @@ h2.sec-title,
   font-family: var(--sans);
 }
 
-.infra.diagram-viz {
+.infra.compact-viz {
   display: flex;
   justify-content: center;
+  padding: 16px 20px;
 }
 
-.infra.diagram-viz svg,
-.infra.diagram-viz #erd {
-  width: 50%;
-  max-width: 540px;
+.infra.compact-viz svg {
+  display: block;
+  height: auto;
+  margin: 0 auto;
 }
 
-.infra.diagram-viz #erd svg {
+.infra.compact-viz--arch svg {
+  width: 72%;
+  max-width: 720px;
+}
+
+.infra.compact-viz--flow svg {
+  width: 52%;
+  max-width: 480px;
+}
+
+.infra.compact-viz--erd #erd {
+  width: 56%;
+  max-width: 560px;
+}
+
+.infra.compact-viz--erd #erd svg {
   width: 100%;
+  height: auto;
 }
 
 #erd svg {
@@ -942,23 +959,28 @@ h2.sec-title,
 .chart-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: 12px;
+  margin-bottom: 8px;
 }
 
 .chart-card {
-  flex: 1 1 280px;
+  flex: 1 1 260px;
   min-width: 0;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 28px;
+  padding: 16px 18px;
   background: var(--panel);
 }
 
 .chart-card .ctitle {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-soft);
-  margin: 0 0 18px;
+  margin: 0 0 8px;
+}
+
+.chart-canvas {
+  position: relative;
+  height: 148px;
 }
 
 .ts-col code {
@@ -1427,8 +1449,8 @@ footer p {
   .stack-rows .stack-row { grid-template-columns: 1fr; gap: 6px; }
   .metric-row { grid-template-columns: 1fr; }
   .stat-grid { flex-direction: column; }
-  .infra.diagram-viz svg,
-  .infra.diagram-viz #erd { width: 100%; max-width: none; }
+  .infra.compact-viz svg,
+  .infra.compact-viz--erd #erd { width: 100%; max-width: none; }
   .phase-grid { grid-template-columns: 1fr; }
   .retro-grid { grid-template-columns: 1fr; }
   .flow-row { flex-direction: column; }
