@@ -142,6 +142,7 @@ section{margin-bottom:4rem;}
     <h1 class="title">DevPilot — GitHub 활동 기반 AI 커리어 코칭 플랫폼</h1>
     <p class="lede">GitHub, 학습기록, 로드맵 등 곳곳에 흩어진 개발자 성장 데이터를 한 곳에 모아 AI 기반 커리어 코칭을 제공하는 서비스. 단순 CRUD 토이 프로젝트가 아니라 OAuth 인증, AI 연동, AWS 배포·운영, CI/CD, 부하테스트 기반 수평 확장까지 프로덕션 백엔드 기술을 1인으로 설계·구축·운영하는 것을 목표로 진행했습니다.</p>
     <div class="metarow">
+      <!-- TODO: DevPilot 실제 개발 시작월 2026.06 / 2026.07 확인 후 전체 문서 통일 -->
       <div class="metacell"><div class="k">PERIOD</div><div class="v">2026.07 ~ 진행 중</div></div>
       <div class="metacell"><div class="k">CONTRIBUTION</div><div class="v">기획·설계·개발·운영<br>100% 단독 수행</div></div>
       <div class="metacell"><div class="k">ROLE</div><div class="v">백엔드 설계, AWS 배포,<br>CI/CD·부하테스트 전담</div></div>
@@ -343,12 +344,6 @@ section{margin-bottom:4rem;}
         <p class="decision-note">관리형 대비 추가 비용 없음, 운영 부담은 직접 감수</p>
       </div>
       <div class="decision-card">
-        <span class="decision-tag">비용 최소화</span>
-        <div class="decision-name">컨테이너 오케스트레이션</div>
-        <div class="decision-choice">EKS → <b>k3s (미착수)</b></div>
-        <p class="decision-note">EKS 컨트롤 플레인 월 $73+ 부담, 개념 학습 목적만 계획</p>
-      </div>
-      <div class="decision-card">
         <div class="decision-name">인증 아키텍처</div>
         <div class="decision-choice">JWT → <b>OAuth2 + Redis Session</b></div>
         <p class="decision-note">SPA/모바일 API가 실제로 필요해지는 시점까지 JWT 도입 보류</p>
@@ -361,7 +356,7 @@ section{margin-bottom:4rem;}
       <div class="decision-card">
         <div class="decision-name">수평 확장 IaC 도구</div>
         <div class="decision-choice">CDK → <b>Terraform</b></div>
-        <p class="decision-note">국내 채용시장 언급 빈도, 멀티클라우드 재사용성 고려</p>
+        <p class="decision-note">선언적 IaC로 인프라를 재현 가능하게 관리하고, ALB/ASG 검증 환경을 필요할 때 생성한 뒤 동일 코드로 제거할 수 있어 확장성 검증을 코드 자산으로 남길 수 있음</p>
       </div>
       <div class="decision-card">
         <div class="decision-name">부하테스트 도구</div>
@@ -494,6 +489,7 @@ section{margin-bottom:4rem;}
           <div class="cl">결과</div>
           <ul>
             <li>ASG 3대 기준 p95 176ms(7배 개선), 처리량 599.6 req/s(3.6배 증가)로 Threshold 통과</li>
+            <li>동일 시나리오 에러율: 단일 EC2 0.02%, ASG 3대 1.10%</li>
             <li>상시 비용 없이 재현 가능한 IaC/스크립트 자산으로 git에 보존</li>
           </ul>
         </div>
@@ -506,8 +502,8 @@ section{margin-bottom:4rem;}
     <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">주요 성과</h2></div>
 
     <div class="stat-grid">
-      <div class="stat-card"><div class="num">7배</div><div class="stat-label">p95 지연시간 개선</div><div class="stat-desc">800 동시접속 기준 1.24s → 152ms (ASG 3대 확장 후)</div></div>
-      <div class="stat-card"><div class="num">3.6배</div><div class="stat-label">처리량 증가</div><div class="stat-desc">167 → 599.6 req/s, 인스턴스 3배 대비 거의 선형적 확장</div></div>
+      <div class="stat-card"><div class="num">7배</div><div class="stat-label">p95 지연시간 개선</div><div class="stat-desc">800 동시접속 기준 1.24s → 176ms (ASG 3대). 에러율: 단일 EC2 0.02% / ASG 3대 1.10%</div></div>
+      <div class="stat-card"><div class="num">3.6배</div><div class="stat-label">처리량 증가</div><div class="stat-desc">167 → 599.6 req/s. 에러율: 단일 EC2 0.02% / ASG 3대 1.10%</div></div>
       <div class="stat-card"><div class="num">수십 초</div><div class="stat-label">배포 소요 시간</div><div class="stat-desc">GHCR 기반 CI/CD 도입으로 수동 배포 대비 대폭 단축</div></div>
       <div class="stat-card"><div class="num">34건</div><div class="stat-label">트러블슈팅 기록·해결</div><div class="stat-desc">배포·CI/CD·세션·수평 확장 전 과정의 이슈를 문서화</div></div>
     </div>
@@ -516,7 +512,7 @@ section{margin-bottom:4rem;}
     <div class="chart-row">
       <div class="chart-card">
         <div class="ctitle">800 동시접속 — p95 지연시간 (ms)</div>
-        <div style="position:relative;height:220px;"><canvas id="chartLatency" role="img" aria-label="단일 EC2, ASG 1대, ASG 3대의 p95 지연시간 비교 막대그래프. 1240ms, 255.55ms, 152.25ms 순으로 감소.">p95 지연시간: 단일 EC2 1240ms, ASG 1대 255.55ms, ASG 3대 152.25ms</canvas></div>
+        <div style="position:relative;height:220px;"><canvas id="chartLatency" role="img" aria-label="단일 EC2, ASG 1대, ASG 3대의 전체 HTTP 요청 기준 p95 지연시간 비교 막대그래프. 1240ms, 255.55ms, 176.48ms 순으로 감소.">p95 지연시간(전체 HTTP 요청): 단일 EC2 1240ms, ASG 1대 255.55ms, ASG 3대 176.48ms</canvas></div>
       </div>
       <div class="chart-card">
         <div class="ctitle">수평 확장에 따른 처리량 (req/s)</div>
@@ -536,7 +532,7 @@ section{margin-bottom:4rem;}
         <div class="ach-idx">02</div>
         <div class="ach-text">
           <p class="lead">데이터 기반 성능 병목 분석부터 IaC 기반 수평 확장 검증까지 완결된 엔지니어링 사이클 수행</p>
-          <p>부하테스트 → N+1/미들웨어 배제 → CPU 한계 확정 → Terraform 기반 확장 검증까지, 추측이 아닌 지표로 문제를 좁혀가는 과정을 직접 경험했습니다.</p>
+          <p>k6 부하테스트로 CPU 병목을 확인하고 ALB + Auto Scaling Group 기반 수평 확장 구조를 적용해 p95 응답시간을 약 7배 개선(1.24s → 176ms)하고, 처리량을 약 3.6배 증가(167 → 599.6 req/s)시켰다.</p>
         </div>
       </div>
       <div class="ach-item">
@@ -601,7 +597,7 @@ new Chart(document.getElementById('chartLatency'), {
     labels: ['단일 EC2', 'ASG 1대', 'ASG 3대'],
     datasets: [{
       label: 'p95 (ms)',
-      data: [1240, 255.55, 152.25],
+      data: [1240, 255.55, 176.48],
       backgroundColor: ['#c9c6ba', '#c9c6ba', '#1f6f5b'],
       borderRadius: 4,
       maxBarThickness: 56

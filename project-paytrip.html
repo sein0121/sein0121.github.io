@@ -78,11 +78,11 @@
       </div>
     </div>
 
-    <div class="diagram-title">마찰 비용 데이터 — 4인 그룹 여행 기준 시뮬레이션</div>
+    <div class="diagram-title">마찰 비용 데이터 — 해커톤 데모 시나리오 기준 (4인 그룹 여행 시뮬레이션)</div>
     <div class="metric-row">
-      <div class="metric"><span class="num">11</span><span class="label">건 평균 선결제<br>AVERAGE PAYMENTS</span></div>
-      <div class="metric"><span class="num">33</span><span class="label">건 수동 송금·검증<br>MANUAL_VERIFICATION_REQUIRED</span></div>
-      <div class="metric"><span class="num">4인</span><span class="label">그룹 여행 시뮬레이션<br>DATA CONTEXT</span></div>
+      <div class="metric"><span class="num">11</span><span class="label">건 평균 선결제<br>시뮬레이션 데이터</span></div>
+      <div class="metric"><span class="num">33</span><span class="label">건 수동 송금·검증<br>시뮬레이션 데이터</span></div>
+      <div class="metric"><span class="num">4인</span><span class="label">그룹 여행 시뮬레이션<br>해커톤 데모 시나리오</span></div>
     </div>
 
     <div class="role-grid cols-3">
@@ -103,7 +103,7 @@
 
   <section id="architecture">
     <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">프로젝트 구조 · 아키텍처</h2></div>
-    <p class="sec-desc">PayTrip은 단순 계산을 넘어 실제 온체인 송금과 검증까지 완결하는 자율 AI 에이전트입니다. RAG·LangGraph·x402를 결합해 <strong>인식(Perceive) → 추론(Reason) → 실행(Act) → 증빙(Prove)</strong> 루프를 구성했고, 제가 담당한 결제 구간은 HTTP 402 핸드셰이크로 “결제가 확인되어야만 정산 완료”가 되도록 붙였습니다.</p>
+    <p class="sec-desc">아래는 팀에서 구현한 PayTrip의 전체 구조이며, 이 중 제가 담당한 영역은 x402 기반 결제 실행·검증 구간과 이를 Flask API 및 LangGraph 에이전트에 연동하는 부분입니다. PayTrip은 단순 계산을 넘어 실제 온체인 송금과 검증까지 완결하는 자율 AI 에이전트입니다. RAG·LangGraph·x402를 결합해 <strong>인식(Perceive) → 추론(Reason) → 실행(Act) → 증빙(Prove)</strong> 루프를 구성했고, 담당 결제 구간은 HTTP 402 챌린지-응답(결제 요청 → USDC 송금 → 서명 재요청 → Solana devnet RPC 검증)으로 “결제가 확인되어야만 정산 완료”가 되도록 붙였습니다.</p>
 
     <div class="diagram-title">Agentic Commerce — 자율 AI 에이전트 루프</div>
     <div class="flow">
@@ -134,7 +134,7 @@
       <div class="infra-containers">
         <div class="container-box">
           <div class="head">01 Data — RAG / ChromaDB</div>
-          <div class="body"><span>사전 구축 지식 베이스</span><span>시뮬레이션 검색 최적화</span><span>Vector chunks 8,000+</span><span>Simulations 500 JEJU</span></div>
+          <div class="body"><span>해커톤 데모 지식 베이스</span><span>시뮬레이션 검색 최적화</span><span>Vector chunks 8,000+ (시뮬레이션)</span><span>Simulations 500 JEJU (데모)</span></div>
         </div>
         <div class="container-box">
           <div class="head">02 Reasoning — LangGraph</div>
