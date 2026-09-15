@@ -7,124 +7,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#fbfaf7;
-  --surface:#ffffff;
-  --border:#e3e0d5;
-  --text:#1c1c1a;
-  --text-2:#6b6a63;
-  --accent:#1f6f5b;
-  --accent-dark:#124a3d;
-  --accent-tint:#eaf3ee;
-  --sans:'IBM Plex Sans KR', sans-serif;
-  --mono:'IBM Plex Mono', monospace;
-}
-*{box-sizing:border-box;}
-body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.7;font-size:15px;}
-a{color:inherit;}
-.site-header{position:sticky;top:0;z-index:20;background:rgba(251,250,247,0.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);}
-.site-header .wrap{max-width:1040px;margin:0 auto;padding:0.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
-.brand{font-family:var(--mono);font-size:14px;font-weight:500;text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--text);}
-.brand .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block;}
-.nav-toggle{display:none;background:none;border:1px solid var(--border);border-radius:6px;padding:0.4rem 0.7rem;font-family:var(--mono);font-size:12px;color:var(--text);cursor:pointer;}
-.site-nav{display:flex;gap:1.5rem;}
-.site-nav a{font-size:13.5px;text-decoration:none;color:var(--text-2);}
-.site-nav a:hover{color:var(--accent);}
-.site-nav a.current{color:var(--accent-dark);font-weight:500;}
-.layout-with-toc{max-width:1040px;margin:0 auto;display:flex;gap:2.5rem;align-items:flex-start;}
-.page{flex:1;min-width:0;padding:3rem 1.5rem 5rem;}
-.page-nav-side{position:sticky;top:80px;width:150px;flex-shrink:0;display:flex;flex-direction:column;gap:0.6rem;padding-top:3rem;font-size:12.5px;}
-.page-nav-side a{text-decoration:none;color:var(--text-2);}
-.page-nav-side a:hover{color:var(--accent);}
-@media (max-width:980px){.page-nav-side{display:none;}}
-@media (max-width:720px){
-  .site-nav{position:absolute;top:100%;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);flex-direction:column;padding:1rem 1.5rem;gap:0.9rem;display:none;}
-  .site-nav.open{display:flex;}
-  .nav-toggle{display:inline-block;}
-}
-.hero{padding-bottom:2.25rem;border-bottom:1px solid var(--border);margin-bottom:3rem;}
-.back-link{display:inline-block;font-size:12.5px;color:var(--text-2);text-decoration:none;margin-bottom:1.1rem;}
-.back-link:hover{color:var(--accent);}
-.eyebrow{font-family:var(--mono);font-size:12.5px;color:var(--accent);margin-bottom:0.7rem;}
-.title{font-size:30px;font-weight:600;line-height:1.35;margin:0 0 1rem;letter-spacing:-0.01em;}
-.lede{font-size:15.5px;color:var(--text-2);max-width:660px;margin:0 0 2rem;}
-.metarow{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.5rem;padding-top:1.4rem;border-top:1px solid var(--border);}
-.metacell .k{font-family:var(--mono);font-size:11px;color:var(--text-2);margin-bottom:0.4rem;letter-spacing:0.03em;}
-.metacell .v{font-size:13.5px;font-weight:500;line-height:1.55;}
-section{margin-bottom:4rem;}
-.sec-head{display:flex;align-items:baseline;gap:0.7rem;margin-bottom:1.3rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border);}
-.sec-num{font-family:var(--mono);font-size:13px;color:var(--accent);}
-.sec-title{font-size:19px;font-weight:600;margin:0;}
-.sec-desc{color:var(--text-2);font-size:13.5px;max-width:700px;margin:0 0 1.5rem;}
-.summary-stack{display:flex;flex-direction:column;gap:1.5rem;}
-.summary-bg p{margin:0 0 1rem;font-size:14.5px;}
-.infopanel{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.4rem;}
-.inforow{display:grid;grid-template-columns:110px 1fr;gap:1rem;padding:0.75rem 0;border-bottom:1px solid var(--border);font-size:13.5px;}
-.inforow:last-child{border-bottom:none;}
-.inforow .label{color:var(--text-2);font-weight:500;}
-.inforow .value{line-height:1.65;}
-.stackgroup h4{font-size:12.5px;color:var(--text-2);margin:1rem 0 0.5rem;font-weight:500;}
-.stackgroup h4:first-child{margin-top:0;}
-.chips{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.4rem;}
-.chip{font-family:var(--mono);font-size:11.5px;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:0.28rem 0.75rem;}
-.diagram-title{font-size:13.5px;font-weight:500;margin:2.2rem 0 0.9rem;}
-.diagram-title:first-of-type{margin-top:0;}
-.diagram-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;overflow-x:auto;margin-bottom:0.5rem;}
-.principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-top:1.6rem;}
-.principle{border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;background:var(--surface);}
-.p-label{font-family:var(--mono);font-size:11.5px;color:var(--accent);margin-bottom:0.5rem;font-weight:500;}
-.principle p{font-size:13.5px;color:var(--text-2);margin:0;line-height:1.6;}
-.decision-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0.9rem;margin-top:0.5rem;}
-.decision-card{border:1px solid var(--border);border-radius:10px;padding:1rem 1.15rem;background:var(--surface);}
-.decision-tag{display:inline-block;font-family:var(--mono);font-size:10.5px;background:var(--accent-tint);color:var(--accent-dark);padding:0.2rem 0.55rem;border-radius:6px;margin-bottom:0.55rem;}
-.decision-name{font-size:13.5px;font-weight:500;margin-bottom:0.4rem;}
-.decision-choice{font-size:12.5px;color:var(--text-2);margin-bottom:0.4rem;}
-.decision-choice b{color:var(--text);font-weight:500;}
-.decision-note{font-size:12px;color:var(--text-2);line-height:1.55;margin:0;}
-.ts-card{border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1.2rem;background:var(--surface);}
-.ts-head{display:flex;align-items:center;gap:0.75rem;margin-bottom:1.1rem;flex-wrap:wrap;}
-.ts-tag{font-family:var(--mono);font-size:10.5px;background:var(--accent);color:#fff;padding:0.28rem 0.6rem;border-radius:6px;}
-.ts-head h3{font-size:15.5px;margin:0;font-weight:600;line-height:1.4;}
-.ts-body{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
-@media (max-width:820px){.ts-body{grid-template-columns:1fr;}}
-.ts-col .cl{font-size:11.5px;font-weight:600;color:var(--text-2);margin-bottom:0.5rem;}
-.ts-col.result .cl{color:var(--accent);}
-.ts-col p, .ts-col li{font-size:13px;line-height:1.65;margin:0 0 0.4rem;}
-.ts-col ul{margin:0;padding-left:1.05rem;}
-.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:1.75rem;}
-.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.25rem;}
-.stat-card .num{font-family:var(--mono);font-size:25px;font-weight:600;color:var(--accent-dark);margin-bottom:0.35rem;}
-.stat-label{font-size:12.5px;font-weight:500;margin-bottom:0.3rem;}
-.stat-desc{font-size:11.5px;color:var(--text-2);line-height:1.55;}
-.chart-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-bottom:2rem;}
-.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;}
-.chart-card .ctitle{font-size:12.5px;font-weight:500;margin-bottom:0.75rem;color:var(--text-2);}
-.ach-list{display:flex;flex-direction:column;gap:1.3rem;}
-.ach-item{display:flex;gap:1rem;}
-.ach-idx{font-family:var(--mono);font-size:12.5px;color:var(--accent);min-width:26px;padding-top:0.15rem;}
-.ach-text .lead{font-weight:600;margin:0 0 0.35rem;font-size:14px;}
-.ach-text p{margin:0;font-size:13px;color:var(--text-2);line-height:1.65;}
-.retro{border-left:3px solid var(--accent);padding:0.2rem 0 0.2rem 1.25rem;margin:0 0 1.6rem;font-size:14.5px;color:var(--text);}
-.takeaways{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;}
-.takeaway{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;}
-.tk-label{font-family:var(--mono);font-size:11.5px;color:var(--accent);margin-bottom:0.5rem;font-weight:500;}
-.takeaway p{font-size:13px;color:var(--text-2);margin:0;line-height:1.65;}
-.project-pager{display:flex;justify-content:space-between;padding-top:2rem;border-top:1px solid var(--border);margin-top:3rem;}
-.project-pager a{text-decoration:none;font-size:13.5px;}
-.project-pager .dir{display:block;font-size:11px;color:var(--text-2);margin-bottom:0.25rem;}
-.site-footer{font-size:12px;color:var(--text-2);margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);}
-</style>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="index.html"><span class="dot"></span>seinLee.log</a>
-    <button class="nav-toggle" aria-label="메뉴 열기" onclick="document.querySelector('.site-nav').classList.toggle('open')">Menu</button>
+    <button class="nav-toggle" aria-label="메뉴 열기">Menu</button>
     <nav class="site-nav">
       <a href="index.html">Home</a>
-      <a href="project-devpilot.html" class="current">DevPilot</a>
+      <a href="project-devpilot.html">DevPilot</a>
       <a href="project-aipf.html">AIPF</a>
       <a href="project-aiocr.html">AIOCR 구축</a>
       <a href="project-paytrip.html">PayTrip</a>
@@ -197,45 +90,45 @@ section{margin-bottom:4rem;}
 <svg width="100%" viewBox="0 0 680 580" role="img">
 <title>DevPilot 시스템 아키텍처</title>
 <desc>브라우저에서 CloudFront를 거쳐 S3(프론트엔드) 또는 EC2(백엔드) 오리진으로 라우팅되고, EC2 내부에서 Nginx가 Docker Compose로 구성된 Backend, MySQL, Redis 컨테이너로 요청을 전달하는 구조.</desc>
-<defs><marker id="arrow-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#6b6a63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<defs><marker id="arrow-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5a6a7e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
 
-<rect x="270" y="20" width="140" height="44" rx="8" fill="#ffffff" stroke="#e3e0d5" stroke-width="0.5"/>
-<text x="340" y="42" text-anchor="middle" dominant-baseline="central" font-size="14" fill="#1c1c1a">브라우저</text>
-<line x1="340" y1="64" x2="340" y2="100" stroke="#6b6a63" stroke-width="1.5" marker-end="url(#arrow-a)"/>
+<rect x="270" y="20" width="140" height="44" rx="3" fill="#ffffff" stroke="#d4dce6" stroke-width="0.5"/>
+<text x="340" y="42" text-anchor="middle" dominant-baseline="central" font-size="14" fill="#1a2332">브라우저</text>
+<line x1="340" y1="64" x2="340" y2="100" stroke="#5a6a7e" stroke-width="1.5" marker-end="url(#arrow-a)"/>
 
-<rect x="60" y="100" width="560" height="160" rx="20" fill="#ffffff" stroke="#e3e0d5" stroke-width="0.5"/>
-<text x="340" y="126" text-anchor="middle" font-size="14" font-weight="500" fill="#1c1c1a">CloudFront</text>
-<text x="340" y="144" text-anchor="middle" font-size="12" fill="#6b6a63">2-오리진 구성 (HTTPS)</text>
+<rect x="60" y="100" width="560" height="160" rx="3" fill="#ffffff" stroke="#d4dce6" stroke-width="0.5"/>
+<text x="340" y="126" text-anchor="middle" font-size="14" font-weight="500" fill="#1a2332">CloudFront</text>
+<text x="340" y="144" text-anchor="middle" font-size="12" fill="#5a6a7e">2-오리진 구성 (HTTPS)</text>
 
-<rect x="90" y="160" width="240" height="70" rx="12" fill="#eaf3ee" stroke="#1f6f5b" stroke-width="0.5"/>
-<text x="210" y="182" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#124a3d">S3 오리진</text>
-<text x="210" y="202" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#2f6a57">프론트엔드 (React 빌드)</text>
+<rect x="90" y="160" width="240" height="70" rx="3" fill="#eef6fb" stroke="#2d8fd6" stroke-width="0.5"/>
+<text x="210" y="182" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1a2332">S3 오리진</text>
+<text x="210" y="202" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5a6a7e">프론트엔드 (React 빌드)</text>
 
-<rect x="350" y="160" width="240" height="70" rx="12" fill="#eaf3ee" stroke="#1f6f5b" stroke-width="0.5"/>
-<text x="470" y="182" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#124a3d">EC2 오리진</text>
-<text x="470" y="202" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#2f6a57">/api /oauth2 /login</text>
+<rect x="350" y="160" width="240" height="70" rx="3" fill="#eef6fb" stroke="#2d8fd6" stroke-width="0.5"/>
+<text x="470" y="182" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1a2332">EC2 오리진</text>
+<text x="470" y="202" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5a6a7e">/api /oauth2 /login</text>
 
-<line x1="470" y1="230" x2="470" y2="300" stroke="#6b6a63" stroke-width="1.5" marker-end="url(#arrow-a)"/>
+<line x1="470" y1="230" x2="470" y2="300" stroke="#5a6a7e" stroke-width="1.5" marker-end="url(#arrow-a)"/>
 
-<rect x="60" y="300" width="560" height="250" rx="20" fill="#ffffff" stroke="#e3e0d5" stroke-width="0.5"/>
-<text x="340" y="326" text-anchor="middle" font-size="14" font-weight="500" fill="#1c1c1a">EC2 (t3.micro, 서울)</text>
-<text x="340" y="344" text-anchor="middle" font-size="12" fill="#6b6a63">탄력적 IP 43.202.184.22</text>
+<rect x="60" y="300" width="560" height="250" rx="3" fill="#ffffff" stroke="#d4dce6" stroke-width="0.5"/>
+<text x="340" y="326" text-anchor="middle" font-size="14" font-weight="500" fill="#1a2332">EC2 (t3.micro, 서울)</text>
+<text x="340" y="344" text-anchor="middle" font-size="12" fill="#5a6a7e">탄력적 IP 43.202.184.22</text>
 
-<rect x="270" y="360" width="140" height="56" rx="8" fill="#eaf3ee" stroke="#1f6f5b" stroke-width="0.5"/>
-<text x="340" y="378" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#124a3d">Nginx</text>
-<text x="340" y="396" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#2f6a57">리버스 프록시</text>
+<rect x="270" y="360" width="140" height="56" rx="3" fill="#eef6fb" stroke="#2d8fd6" stroke-width="0.5"/>
+<text x="340" y="378" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1a2332">Nginx</text>
+<text x="340" y="396" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5a6a7e">리버스 프록시</text>
 
-<line x1="340" y1="416" x2="340" y2="428" stroke="#6b6a63" stroke-width="1.5" marker-end="url(#arrow-a)"/>
+<line x1="340" y1="416" x2="340" y2="428" stroke="#5a6a7e" stroke-width="1.5" marker-end="url(#arrow-a)"/>
 
-<rect x="80" y="428" width="520" height="82" rx="8" fill="none" stroke="#c9c6ba" stroke-width="0.5" stroke-dasharray="4 4"/>
-<text x="96" y="446" font-size="12" fill="#6b6a63">Docker Compose</text>
+<rect x="80" y="428" width="520" height="82" rx="3" fill="none" stroke="#d4dce6" stroke-width="0.5" stroke-dasharray="4 4"/>
+<text x="96" y="446" font-size="12" fill="#5a6a7e">Docker Compose</text>
 
-<rect x="100" y="456" width="150" height="44" rx="8" fill="#eaf3ee" stroke="#1f6f5b" stroke-width="0.5"/>
-<text x="175" y="478" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#124a3d">Backend</text>
-<rect x="270" y="456" width="150" height="44" rx="8" fill="#eaf3ee" stroke="#1f6f5b" stroke-width="0.5"/>
-<text x="345" y="478" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#124a3d">MySQL</text>
-<rect x="440" y="456" width="150" height="44" rx="8" fill="#eaf3ee" stroke="#1f6f5b" stroke-width="0.5"/>
-<text x="515" y="478" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#124a3d">Redis</text>
+<rect x="100" y="456" width="150" height="44" rx="3" fill="#eef6fb" stroke="#2d8fd6" stroke-width="0.5"/>
+<text x="175" y="478" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1a2332">Backend</text>
+<rect x="270" y="456" width="150" height="44" rx="3" fill="#eef6fb" stroke="#2d8fd6" stroke-width="0.5"/>
+<text x="345" y="478" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1a2332">MySQL</text>
+<rect x="440" y="456" width="150" height="44" rx="3" fill="#eef6fb" stroke="#2d8fd6" stroke-width="0.5"/>
+<text x="515" y="478" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1a2332">Redis</text>
 </svg>
     </div>
 
@@ -244,36 +137,36 @@ section{margin-bottom:4rem;}
 <svg width="100%" viewBox="0 0 680 716" role="img">
 <title>GitHub OAuth 로그인 요청 흐름</title>
 <desc>브라우저의 로그인 클릭부터 CloudFront 라우팅, Nginx의 HTTPS 헤더 처리, Backend와 GitHub 간 OAuth 코드 교환, Redis 세션 저장, 로그인 완료까지 6단계로 이어지는 흐름.</desc>
-<defs><marker id="arrow-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#6b6a63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<defs><marker id="arrow-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5a6a7e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
 
-<rect x="140" y="40" width="400" height="56" rx="8" fill="#ffffff" stroke="#e3e0d5" stroke-width="0.5"/>
-<text x="340" y="60" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1c1c1a">브라우저</text>
-<text x="340" y="80" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#6b6a63">GitHub 로그인 버튼 클릭</text>
-<line x1="340" y1="96" x2="340" y2="156" stroke="#6b6a63" stroke-width="1.5" marker-end="url(#arrow-b)"/>
+<rect x="140" y="40" width="400" height="56" rx="3" fill="#ffffff" stroke="#d4dce6" stroke-width="0.5"/>
+<text x="340" y="60" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1a2332">브라우저</text>
+<text x="340" y="80" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5a6a7e">GitHub 로그인 버튼 클릭</text>
+<line x1="340" y1="96" x2="340" y2="156" stroke="#5a6a7e" stroke-width="1.5" marker-end="url(#arrow-b)"/>
 
-<rect x="140" y="156" width="400" height="56" rx="8" fill="#eaf3ee" stroke="#1f6f5b" stroke-width="0.5"/>
-<text x="340" y="176" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#124a3d">CloudFront</text>
-<text x="340" y="196" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#2f6a57">/login/* → EC2 오리진 라우팅</text>
-<line x1="340" y1="212" x2="340" y2="272" stroke="#6b6a63" stroke-width="1.5" marker-end="url(#arrow-b)"/>
+<rect x="140" y="156" width="400" height="56" rx="3" fill="#eef6fb" stroke="#2d8fd6" stroke-width="0.5"/>
+<text x="340" y="176" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1a2332">CloudFront</text>
+<text x="340" y="196" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5a6a7e">/login/* → EC2 오리진 라우팅</text>
+<line x1="340" y1="212" x2="340" y2="272" stroke="#5a6a7e" stroke-width="1.5" marker-end="url(#arrow-b)"/>
 
-<rect x="140" y="272" width="400" height="56" rx="8" fill="#eaf3ee" stroke="#1f6f5b" stroke-width="0.5"/>
-<text x="340" y="292" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#124a3d">Nginx</text>
-<text x="340" y="312" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#2f6a57">X-Forwarded-Proto: https 고정 후 전달</text>
-<line x1="340" y1="328" x2="340" y2="388" stroke="#6b6a63" stroke-width="1.5" marker-end="url(#arrow-b)"/>
+<rect x="140" y="272" width="400" height="56" rx="3" fill="#eef6fb" stroke="#2d8fd6" stroke-width="0.5"/>
+<text x="340" y="292" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1a2332">Nginx</text>
+<text x="340" y="312" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5a6a7e">X-Forwarded-Proto: https 고정 후 전달</text>
+<line x1="340" y1="328" x2="340" y2="388" stroke="#5a6a7e" stroke-width="1.5" marker-end="url(#arrow-b)"/>
 
-<rect x="140" y="388" width="400" height="56" rx="8" fill="#eaf3ee" stroke="#1f6f5b" stroke-width="0.5"/>
-<text x="340" y="408" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#124a3d">Backend ↔ GitHub</text>
-<text x="340" y="428" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#2f6a57">OAuth 인가 코드 교환</text>
-<line x1="340" y1="444" x2="340" y2="504" stroke="#6b6a63" stroke-width="1.5" marker-end="url(#arrow-b)"/>
+<rect x="140" y="388" width="400" height="56" rx="3" fill="#eef6fb" stroke="#2d8fd6" stroke-width="0.5"/>
+<text x="340" y="408" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1a2332">Backend ↔ GitHub</text>
+<text x="340" y="428" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5a6a7e">OAuth 인가 코드 교환</text>
+<line x1="340" y1="444" x2="340" y2="504" stroke="#5a6a7e" stroke-width="1.5" marker-end="url(#arrow-b)"/>
 
-<rect x="140" y="504" width="400" height="56" rx="8" fill="#eaf3ee" stroke="#1f6f5b" stroke-width="0.5"/>
-<text x="340" y="524" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#124a3d">Backend</text>
-<text x="340" y="544" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#2f6a57">세션 생성 후 Redis에 저장</text>
-<line x1="340" y1="560" x2="340" y2="620" stroke="#6b6a63" stroke-width="1.5" marker-end="url(#arrow-b)"/>
+<rect x="140" y="504" width="400" height="56" rx="3" fill="#eef6fb" stroke="#2d8fd6" stroke-width="0.5"/>
+<text x="340" y="524" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1a2332">Backend</text>
+<text x="340" y="544" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5a6a7e">세션 생성 후 Redis에 저장</text>
+<line x1="340" y1="560" x2="340" y2="620" stroke="#5a6a7e" stroke-width="1.5" marker-end="url(#arrow-b)"/>
 
-<rect x="140" y="620" width="400" height="56" rx="8" fill="#ffffff" stroke="#e3e0d5" stroke-width="0.5"/>
-<text x="340" y="640" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1c1c1a">브라우저</text>
-<text x="340" y="660" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#6b6a63">세션 쿠키 수신, 로그인 완료</text>
+<rect x="140" y="620" width="400" height="56" rx="3" fill="#ffffff" stroke="#d4dce6" stroke-width="0.5"/>
+<text x="340" y="640" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1a2332">브라우저</text>
+<text x="340" y="660" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5a6a7e">세션 쿠키 수신, 로그인 완료</text>
 </svg>
     </div>
 
@@ -282,36 +175,36 @@ section{margin-bottom:4rem;}
 <svg width="100%" viewBox="0 0 680 716" role="img">
 <title>DevPilot CI/CD 배포 파이프라인</title>
 <desc>feature 브랜치 작업부터 PR과 CI 빌드 검증, main 병합, GitHub Actions의 Docker 이미지 빌드와 GHCR push, EC2의 이미지 pull 및 컨테이너 재기동까지 이어지는 6단계 배포 파이프라인.</desc>
-<defs><marker id="arrow-c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#6b6a63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<defs><marker id="arrow-c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5a6a7e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
 
-<rect x="140" y="40" width="400" height="56" rx="8" fill="#ffffff" stroke="#e3e0d5" stroke-width="0.5"/>
-<text x="340" y="60" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1c1c1a">feature 브랜치 작업</text>
-<text x="340" y="80" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#6b6a63">feat/ fix/ chore/ 접두사</text>
-<line x1="340" y1="96" x2="340" y2="156" stroke="#6b6a63" stroke-width="1.5" marker-end="url(#arrow-c)"/>
+<rect x="140" y="40" width="400" height="56" rx="3" fill="#ffffff" stroke="#d4dce6" stroke-width="0.5"/>
+<text x="340" y="60" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1a2332">feature 브랜치 작업</text>
+<text x="340" y="80" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5a6a7e">feat/ fix/ chore/ 접두사</text>
+<line x1="340" y1="96" x2="340" y2="156" stroke="#5a6a7e" stroke-width="1.5" marker-end="url(#arrow-c)"/>
 
-<rect x="140" y="156" width="400" height="56" rx="8" fill="#eaf3ee" stroke="#1f6f5b" stroke-width="0.5"/>
-<text x="340" y="176" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#124a3d">PR 생성</text>
-<text x="340" y="196" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#2f6a57">ci-check.yml 빌드 검증 (배포 없음)</text>
-<line x1="340" y1="212" x2="340" y2="272" stroke="#6b6a63" stroke-width="1.5" marker-end="url(#arrow-c)"/>
+<rect x="140" y="156" width="400" height="56" rx="3" fill="#eef6fb" stroke="#2d8fd6" stroke-width="0.5"/>
+<text x="340" y="176" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1a2332">PR 생성</text>
+<text x="340" y="196" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5a6a7e">ci-check.yml 빌드 검증 (배포 없음)</text>
+<line x1="340" y1="212" x2="340" y2="272" stroke="#5a6a7e" stroke-width="1.5" marker-end="url(#arrow-c)"/>
 
-<rect x="140" y="272" width="400" height="56" rx="8" fill="#ffffff" stroke="#e3e0d5" stroke-width="0.5"/>
-<text x="340" y="292" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1c1c1a">main 브랜치 merge</text>
-<text x="340" y="312" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#6b6a63">branch protection 체크 통과 후</text>
-<line x1="340" y1="328" x2="340" y2="388" stroke="#6b6a63" stroke-width="1.5" marker-end="url(#arrow-c)"/>
+<rect x="140" y="272" width="400" height="56" rx="3" fill="#ffffff" stroke="#d4dce6" stroke-width="0.5"/>
+<text x="340" y="292" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1a2332">main 브랜치 merge</text>
+<text x="340" y="312" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5a6a7e">branch protection 체크 통과 후</text>
+<line x1="340" y1="328" x2="340" y2="388" stroke="#5a6a7e" stroke-width="1.5" marker-end="url(#arrow-c)"/>
 
-<rect x="140" y="388" width="400" height="56" rx="8" fill="#eaf3ee" stroke="#1f6f5b" stroke-width="0.5"/>
-<text x="340" y="408" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#124a3d">GitHub Actions</text>
-<text x="340" y="428" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#2f6a57">러너에서 Docker 이미지 빌드</text>
-<line x1="340" y1="444" x2="340" y2="504" stroke="#6b6a63" stroke-width="1.5" marker-end="url(#arrow-c)"/>
+<rect x="140" y="388" width="400" height="56" rx="3" fill="#eef6fb" stroke="#2d8fd6" stroke-width="0.5"/>
+<text x="340" y="408" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1a2332">GitHub Actions</text>
+<text x="340" y="428" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5a6a7e">러너에서 Docker 이미지 빌드</text>
+<line x1="340" y1="444" x2="340" y2="504" stroke="#5a6a7e" stroke-width="1.5" marker-end="url(#arrow-c)"/>
 
-<rect x="140" y="504" width="400" height="56" rx="8" fill="#eaf3ee" stroke="#1f6f5b" stroke-width="0.5"/>
-<text x="340" y="524" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#124a3d">GHCR</text>
-<text x="340" y="544" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#2f6a57">ghcr.io/sein0121/devpilot-backend push</text>
-<line x1="340" y1="560" x2="340" y2="620" stroke="#6b6a63" stroke-width="1.5" marker-end="url(#arrow-c)"/>
+<rect x="140" y="504" width="400" height="56" rx="3" fill="#eef6fb" stroke="#2d8fd6" stroke-width="0.5"/>
+<text x="340" y="524" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1a2332">GHCR</text>
+<text x="340" y="544" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5a6a7e">ghcr.io/sein0121/devpilot-backend push</text>
+<line x1="340" y1="560" x2="340" y2="620" stroke="#5a6a7e" stroke-width="1.5" marker-end="url(#arrow-c)"/>
 
-<rect x="140" y="620" width="400" height="56" rx="8" fill="#eaf3ee" stroke="#1f6f5b" stroke-width="0.5"/>
-<text x="340" y="640" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#124a3d">EC2</text>
-<text x="340" y="660" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#2f6a57">git pull → image pull → 컨테이너 재기동</text>
+<rect x="140" y="620" width="400" height="56" rx="3" fill="#eef6fb" stroke="#2d8fd6" stroke-width="0.5"/>
+<text x="340" y="640" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#1a2332">EC2</text>
+<text x="340" y="660" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#5a6a7e">git pull → image pull → 컨테이너 재기동</text>
 </svg>
     </div>
 
@@ -580,7 +473,7 @@ section{margin-bottom:4rem;}
 
 </div>
 
-<nav class="page-nav-side">
+<nav class="page-nav page-nav-side">
   <a href="#summary">01 요약</a>
   <a href="#architecture">02 구조</a>
   <a href="#troubleshooting">03 트러블슈팅</a>
@@ -598,8 +491,8 @@ new Chart(document.getElementById('chartLatency'), {
     datasets: [{
       label: 'p95 (ms)',
       data: [1240, 255.55, 176.48],
-      backgroundColor: ['#c9c6ba', '#c9c6ba', '#1f6f5b'],
-      borderRadius: 4,
+      backgroundColor: ['#d4dce6', '#d4dce6', '#2d8fd6'],
+      borderRadius: 3,
       maxBarThickness: 56
     }]
   },
@@ -608,8 +501,8 @@ new Chart(document.getElementById('chartLatency'), {
     maintainAspectRatio: false,
     plugins: { legend: { display: false } },
     scales: {
-      y: { beginAtZero: true, ticks: { color: '#6b6a63' }, grid: { color: '#e3e0d5' } },
-      x: { ticks: { color: '#6b6a63' }, grid: { display: false } }
+      y: { beginAtZero: true, ticks: { color: '#5a6a7e' }, grid: { color: '#d4dce6' } },
+      x: { ticks: { color: '#5a6a7e' }, grid: { display: false } }
     }
   }
 });
@@ -620,8 +513,8 @@ new Chart(document.getElementById('chartThroughput'), {
     datasets: [{
       label: 'req/s',
       data: [167, 599.6],
-      backgroundColor: ['#c9c6ba', '#1f6f5b'],
-      borderRadius: 4,
+      backgroundColor: ['#d4dce6', '#2d8fd6'],
+      borderRadius: 3,
       maxBarThickness: 56
     }]
   },
@@ -630,8 +523,8 @@ new Chart(document.getElementById('chartThroughput'), {
     maintainAspectRatio: false,
     plugins: { legend: { display: false } },
     scales: {
-      y: { beginAtZero: true, ticks: { color: '#6b6a63' }, grid: { color: '#e3e0d5' } },
-      x: { ticks: { color: '#6b6a63' }, grid: { display: false } }
+      y: { beginAtZero: true, ticks: { color: '#5a6a7e' }, grid: { color: '#d4dce6' } },
+      x: { ticks: { color: '#5a6a7e' }, grid: { display: false } }
     }
   }
 });
@@ -644,11 +537,11 @@ mermaid.initialize({
   themeVariables: {
     fontFamily: '"IBM Plex Sans KR", sans-serif',
     fontSize: '13px',
-    primaryColor: '#eaf3ee',
-    primaryBorderColor: '#1f6f5b',
-    primaryTextColor: '#124a3d',
-    lineColor: '#6b6a63',
-    textColor: '#1c1c1a',
+    primaryColor: '#eef6fb',
+    primaryBorderColor: '#2d8fd6',
+    primaryTextColor: '#1a2332',
+    lineColor: '#5a6a7e',
+    textColor: '#1a2332',
     tertiaryColor: '#ffffff'
   }
 });
@@ -719,5 +612,6 @@ const { svg } = await mermaid.render('erd-svg', `erDiagram
   }`);
 document.getElementById('erd').innerHTML = svg;
 </script>
+<script src="js/main.js"></script>
 </body>
 </html>
