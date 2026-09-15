@@ -909,16 +909,13 @@ h2.sec-title,
   border-radius: var(--radius);
 }
 
-.diagram-card {
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 20px;
-  background: var(--panel);
-  overflow-x: auto;
-  margin-bottom: 8px;
+.infra svg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
-.diagram-card svg text {
+.infra svg text {
   font-family: var(--sans);
 }
 
@@ -927,73 +924,26 @@ h2.sec-title,
   height: auto;
 }
 
-.decision-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 14px;
-  margin-top: 6px;
-}
-
-.decision-card {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  padding: 18px 20px;
-}
-
-.decision-tag {
-  display: inline-block;
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--teal);
-  background: var(--panel-alt);
-  border: 1px solid var(--line);
-  padding: 2px 8px;
-  border-radius: var(--radius);
-  margin-bottom: 10px;
-}
-
-.decision-name {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
-.decision-choice {
-  font-size: 13.5px;
-  color: var(--text-soft);
-  margin-bottom: 8px;
-}
-
-.decision-choice b {
-  color: var(--text);
-  font-weight: 600;
-}
-
-.decision-note {
-  font-size: 13px;
-  color: var(--text-soft);
-  line-height: 1.6;
-  margin: 0;
-}
-
 .chart-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 16px;
-  margin-bottom: 40px;
+  margin-bottom: 16px;
 }
 
 .chart-card {
-  background: var(--panel);
+  flex: 1 1 280px;
+  min-width: 0;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 20px;
+  padding: 28px;
+  background: var(--panel);
 }
 
 .chart-card .ctitle {
-  font-size: 13.5px;
+  font-size: 14px;
   color: var(--text-soft);
-  margin-bottom: 12px;
+  margin: 0 0 18px;
 }
 
 .ts-col code {
@@ -1010,7 +960,7 @@ h2.sec-title,
   flex-wrap: wrap;
 }
 
-.principles .principle { flex: 1 1 0; min-width: 0; }
+.principles .principle { flex: 1 1 280px; min-width: 0; }
 .takeaways .takeaway { flex: 1 1 240px; min-width: 0; }
 
 .principle,
