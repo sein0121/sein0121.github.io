@@ -83,7 +83,7 @@
     <p class="sec-desc">브라우저 → CloudFront → EC2(Nginx → Docker Compose)로 배포되며, 인증·배포·데이터 모델을 다이어그램으로 정리했습니다.</p>
 
     <div class="diagram-title">전체 시스템 아키텍처</div>
-    <div class="infra">
+    <div class="infra diagram-viz">
 <svg width="100%" viewBox="0 0 680 580" role="img">
 <title>DevPilot 시스템 아키텍처</title>
 <desc>브라우저에서 CloudFront를 거쳐 S3(프론트엔드) 또는 EC2(백엔드) 오리진으로 라우팅되고, EC2 내부에서 Nginx가 Docker Compose로 구성된 Backend, MySQL, Redis 컨테이너로 요청을 전달하는 구조.</desc>
@@ -129,7 +129,7 @@
     </div>
 
     <div class="diagram-title">GitHub OAuth 로그인 요청 흐름</div>
-    <div class="infra">
+    <div class="infra diagram-viz">
 <svg width="100%" viewBox="0 0 680 716" role="img">
 <title>GitHub OAuth 로그인 요청 흐름</title>
 <desc>브라우저의 로그인 클릭부터 CloudFront 라우팅, Nginx의 HTTPS 헤더 처리, Backend와 GitHub 간 OAuth 코드 교환, Redis 세션 저장, 로그인 완료까지 6단계로 이어지는 흐름.</desc>
@@ -167,7 +167,7 @@
     </div>
 
     <div class="diagram-title">CI/CD 배포 파이프라인</div>
-    <div class="infra">
+    <div class="infra diagram-viz">
 <svg width="100%" viewBox="0 0 680 716" role="img">
 <title>DevPilot CI/CD 배포 파이프라인</title>
 <desc>feature 브랜치 작업부터 PR과 CI 빌드 검증, main 병합, GitHub Actions의 Docker 이미지 빌드와 GHCR push, EC2의 이미지 pull 및 컨테이너 재기동까지 이어지는 6단계 배포 파이프라인.</desc>
@@ -205,7 +205,7 @@
     </div>
 
     <div class="diagram-title">데이터 모델 (ERD)</div>
-    <div class="infra">
+    <div class="infra diagram-viz">
       <div id="erd"></div>
     </div>
 

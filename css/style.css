@@ -919,6 +919,21 @@ h2.sec-title,
   font-family: var(--sans);
 }
 
+.infra.diagram-viz {
+  display: flex;
+  justify-content: center;
+}
+
+.infra.diagram-viz svg,
+.infra.diagram-viz #erd {
+  width: 50%;
+  max-width: 540px;
+}
+
+.infra.diagram-viz #erd svg {
+  width: 100%;
+}
+
 #erd svg {
   max-width: 100%;
   height: auto;
@@ -1412,6 +1427,8 @@ footer p {
   .stack-rows .stack-row { grid-template-columns: 1fr; gap: 6px; }
   .metric-row { grid-template-columns: 1fr; }
   .stat-grid { flex-direction: column; }
+  .infra.diagram-viz svg,
+  .infra.diagram-viz #erd { width: 100%; max-width: none; }
   .phase-grid { grid-template-columns: 1fr; }
   .retro-grid { grid-template-columns: 1fr; }
   .flow-row { flex-direction: column; }
