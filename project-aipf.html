@@ -36,7 +36,7 @@
     <p class="lede">정식 프로젝트명 — 신한라이프 생성형AI 활용한 PF시스템 내 보기·납기 입력 자동화(AIPF) 구축. 보험 상품 정보 관리의 핵심 업무를 AI 기반으로 자동화해, 상품 개발 업무의 속도와 정확도를 함께 개선했습니다.</p>
     <div class="metarow">
       <div class="metacell"><div class="k">PERIOD</div><div class="v">2025.07.07 – 2025.12.05<br>(5개월)</div></div>
-      <div class="metacell"><div class="k">CONTRIBUTION</div><div class="v">파이프라인 개발<br>50% 기여</div></div>
+      <div class="metacell"><div class="k">CONTRIBUTION</div><div class="v">파이프라인 개발<br>70% 기여</div></div>
       <div class="metacell"><div class="k">ROLE</div><div class="v">Worker·Queue 구성 및<br>상태관리·재처리 구조 구현</div></div>
       <div class="metacell"><div class="k">STACK</div><div class="v">Python · FastAPI · Redis<br>+ LLM inference</div></div>
     </div>
@@ -54,7 +54,7 @@
 
       <div class="infopanel">
         <div class="inforow"><div class="label">기간</div><div class="value">2025.07.07 – 2025.12.05 (5개월)</div></div>
-        <div class="inforow"><div class="label">인원</div><div class="value">전체 파이프라인 개발 작업의 50%를 담당</div></div>
+        <div class="inforow"><div class="label">인원</div><div class="value">전체 파이프라인 개발 작업의 70%를 담당</div></div>
         <div class="inforow"><div class="label">담당 개발</div><div class="value">
           LLM을 실제 업무 시스템에 통합하는 백엔드·파이프라인 개발 담당<br>
           · Worker·Queue 구성 — OCR→Parser 결과 전달, Extract 문서 단위 병렬 처리, Filtering 코드매핑·후처리<br>
@@ -139,7 +139,7 @@
   <!-- 03 트러블슈팅 -->
   <section id="troubleshooting">
     <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">트러블슈팅</h2></div>
-    <p class="sec-desc">파이프라인을 프로덕션 수준까지 끌어올리는 과정에서 마주한 다섯 가지 핵심 이슈와 해결 과정입니다.</p>
+    <p class="sec-desc">파이프라인을 프로덕션 수준까지 끌어올리는 과정에서 마주한 핵심 이슈와 해결 과정입니다.</p>
 
     <div class="ts-card">
       <div class="ts-head"><span class="ts-tag">Extract</span><h3>여러 Worker가 동시에 끝내도 다음 단계는 정확히 한 번만 — Barrier 동기화</h3></div>
@@ -216,7 +216,7 @@
       </div>
     </div>
 
-    <div class="ts-card">
+   {% comment %} <div class="ts-card">
       <div class="ts-head"><span class="ts-tag">Filtering</span><h3>MCP·PF 코드 체계 불일치와 상품·보종 매칭 누락</h3></div>
       <div class="ts-body">
         <div class="ts-col">
@@ -239,7 +239,7 @@
           </ul>
         </div>
       </div>
-    </div>
+    </div> {% endcomment %}
 
     <div class="ts-card">
       <div class="ts-head"><span class="ts-tag">전체</span><h3>대량 문서 처리 중 일부 실패 — 상태 기반 재처리 구조</h3></div>
