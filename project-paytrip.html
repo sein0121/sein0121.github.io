@@ -33,338 +33,98 @@
     <a class="back-link" href="index.html#projects">← 전체 프로젝트로</a>
     <div class="eyebrow">사이드 프로젝트 · Google Cloud x Solana Foundation 해커톤</div>
     <h1 class="title">PayTrip</h1>
-    <p class="lede">그룹 채팅과 결제 내역을 RAG로 분석해 Gemini가 인당 정산 금액을 계산하고, x402 프로토콜을 통해 Solana devnet에서 USDC 자동 송금까지 처리하는 AI 여행 정산 에이전트입니다.</p>
+    <p class="lede">여행 데이터로 정산 계획을 계산하고 Solana devnet USDC 송금과 거래 증빙까지 연결한 3인 해커톤 프로젝트입니다. 저는 Python·Flask 결제 API와 송금 모듈을 개발하고, HTTP 402 결제 요구부터 송금 후 재요청까지의 흐름을 검증했습니다.</p>
     <div class="metarow">
-      <div class="metacell"><div class="k">PERIOD</div><div class="v">2026.08 – 2026.08<br>해커톤 · 사이드 프로젝트</div></div>
-      <div class="metacell"><div class="k">CONTRIBUTION</div><div class="v">3인 프로젝트<br>x402 결제 모듈·검증</div></div>
-      <div class="metacell"><div class="k">ROLE</div><div class="v">x402 사이클 구현<br>결제 API · 에이전트 연동</div></div>
-      <div class="metacell"><div class="k">STACK</div><div class="v">Python · Flask · LangGraph<br>+ Solana / Gemini</div></div>
+      <div class="metacell"><div class="k">PERIOD</div><div class="v">2026.08<br>해커톤 · 사이드 프로젝트</div></div>
+      <div class="metacell"><div class="k">CONTRIBUTION</div><div class="v">3인 프로젝트<br>결제 실행 구간 담당</div></div>
+      <div class="metacell"><div class="k">ROLE</div><div class="v">결제 API · 송금 모듈<br>로컬 통합 검증</div></div>
+      <div class="metacell"><div class="k">STACK</div><div class="v">Python · Flask<br>Solana devnet</div></div>
     </div>
   </header>
 
   <section id="summary">
     <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">프로젝트 요약</h2></div>
-
     <div class="summary-stack">
       <div class="summary-bg">
-        <p><strong>배경.</strong> 기존의 정산 방식은 계산부터 송금 확인까지 모든 과정이 수작업으로 이루어져 막대한 마찰 비용이 발생합니다. 식당 선결제 후 여행이 끝나면 엑셀이나 계산기로 1/N을 계산하고, 영수증 캡처를 단톡방에 공유한 뒤 일대일로 대조합니다. 카드사 더치페이는 ‘계산’에 국한되고, 실제 송금과 완료 증빙은 여전히 유저의 몫입니다. 반복되는 수작업 때문에 여행의 즐거움보다 정산의 스트레스가 커지는 상황을 PayTrip이 풀고자 했습니다.</p>
-        <p>Google Cloud x Solana Foundation 해커톤에 3인으로 참여한 사이드 프로젝트입니다. 그룹 채팅과 결제 내역을 RAG로 분석해 Gemini가 인당 정산 금액을 계산하고, x402 프로토콜을 통해 Solana devnet에서 USDC 자동 송금까지 처리합니다. 계산만 하는 일반 정산 챗봇과 달리, 계산·자율 실행·온체인 검증을 한 루프로 묶는 것을 목표로 했습니다. 저는 그 중 <strong>x402 결제 사이클, 재사용 가능한 결제 모듈·API 서버, LangGraph 에이전트 결제 연동과 서명 검증</strong>을 담당했습니다.</p>
+        <p><strong>배경.</strong> 그룹 여행에서 여러 사람이 비용을 선결제하면 정산 금액을 계산한 뒤에도 송금과 거래 확인을 따로 진행해야 합니다. 팀은 사전 구축한 여행 시뮬레이션 데이터를 바탕으로 정산 계획과 테스트 네트워크 송금을 연결했습니다.</p>
+        <p><strong>담당.</strong> 저는 <strong>Flask 기반 결제 API와 재사용 가능한 USDC 송금 모듈</strong>을 개발했습니다. 결제 기능을 독립적으로 실행·검증한 뒤, 팀원에게 호출 계약과 LangGraph 노드 호출 예제를 제공해 통합을 지원했습니다.</p>
         <div class="project-links">
           <a class="tag" href="https://github.com/baekenough/paytrip" target="_blank" rel="noopener">GitHub ↗</a>
           <a class="tag" href="https://paytrip-33319068113.us-central1.run.app" target="_blank" rel="noopener">Live Demo ↗</a>
         </div>
       </div>
-
       <div class="infopanel">
-        <div class="inforow"><div class="label">기간</div><div class="value">2026.08 (해커톤 · 사이드 프로젝트)</div></div>
-        <div class="inforow"><div class="label">인원</div><div class="value">3인 — Google Cloud x Solana Foundation 해커톤 참여</div></div>
-        <div class="inforow"><div class="label">담당 개발</div><div class="value">
-          x402 프로토콜 및 결제 실행 구간 담당<br>
-          · x402 프로토콜 전체 사이클 구현 — HTTP 402 챌린지-응답(결제 요청 → USDC 송금 → 서명 재요청 → devnet RPC 검증)을 end-to-end로 구현·검증<br>
-          · 재사용 가능한 결제 모듈, Flask 기반 x402 API 서버 구축<br>
-          · LangGraph 에이전트에서 결제 플로우 연동, 위조/정상 서명 케이스 검증, Solana Explorer 온체인 거래 증빙 확보
-        </div></div>
+        <div class="inforow"><div class="label">기간 · 인원</div><div class="value">2026.08 · 3인 · Google Cloud × Solana Foundation 해커톤</div></div>
+        <div class="inforow"><div class="label">직접 구현</div><div class="value">HTTP 402 결제 API, USDC 송금 모듈, 결제 조건 파싱·예산 상한 검사, 단계별 실패 결과 구성</div></div>
+        <div class="inforow"><div class="label">협업 범위</div><div class="value">모듈·사용 가이드·노드 호출 예제 제공. 실제 LangGraph 연결과 Cloud Run 배포는 팀원이 담당했습니다.</div></div>
       </div>
-
       <div class="stackgroup">
-        <h4>Application</h4>
-        <div class="chips"><span class="chip">Python</span><span class="chip">Flask</span><span class="chip">LangGraph</span></div>
-        <h4>AI</h4>
-        <div class="chips"><span class="chip">Gemini 2.5-flash</span><span class="chip">Vertex AI</span><span class="chip">RAG</span><span class="chip">ChromaDB</span></div>
-        <h4>Payment</h4>
-        <div class="chips"><span class="chip">Solana</span><span class="chip">solders</span><span class="chip">solana-py</span><span class="chip">x402</span><span class="chip">USDC</span></div>
-        <h4>Infra</h4>
-        <div class="chips"><span class="chip">GCP</span><span class="chip">Cloud Run</span></div>
-      </div>
-    </div>
-
-    <div class="diagram-title">마찰 비용 데이터 — 해커톤 데모 시나리오 기준 (4인 그룹 여행 시뮬레이션)</div>
-    <div class="metric-row">
-      <div class="metric"><span class="num">11</span><span class="label">건 평균 선결제<br>시뮬레이션 데이터</span></div>
-      <div class="metric"><span class="num">33</span><span class="label">건 수동 송금·검증<br>시뮬레이션 데이터</span></div>
-      <div class="metric"><span class="num">4인</span><span class="label">그룹 여행 시뮬레이션<br>해커톤 데모 시나리오</span></div>
-    </div>
-
-    <div class="role-grid cols-3">
-      <div class="dept">
-        <h4>번거로운 절차</h4>
-        <p>식당 선결제 후 여행이 끝나면 엑셀이나 계산기로 수동 계산을 수행하는 비효율.</p>
-      </div>
-      <div class="dept">
-        <h4>증빙의 어려움</h4>
-        <p>계좌이체 후 캡처본을 단톡방에 공유하고 일대일 대조해야 하는 물리적 불편.</p>
-      </div>
-      <div class="dept">
-        <h4>기존 서비스의 한계</h4>
-        <p>카드사 더치페이는 ‘계산’에 국한되며, 실제 송금과 완료 증빙은 여전히 유저의 몫.</p>
+        <h4>담당 기술</h4>
+        <div class="chips"><span class="chip">Python</span><span class="chip">Flask</span><span class="chip">solana-py</span><span class="chip">solders</span><span class="chip">SPL Token</span></div>
+        <h4>팀 서비스 구성</h4>
+        <div class="chips"><span class="chip">FastAPI</span><span class="chip">LangGraph</span><span class="chip">Gemini · Vertex AI</span><span class="chip">ChromaDB</span><span class="chip">Cloud Run</span></div>
       </div>
     </div>
   </section>
 
   <section id="architecture">
-    <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">프로젝트 구조 · 아키텍처</h2></div>
-    <p class="sec-desc">아래는 팀에서 구현한 PayTrip의 전체 구조이며, 이 중 제가 담당한 영역은 x402 기반 결제 실행·검증 구간과 이를 Flask API 및 LangGraph 에이전트에 연동하는 부분입니다. PayTrip은 단순 계산을 넘어 실제 온체인 송금과 검증까지 완결하는 자율 AI 에이전트입니다. RAG·LangGraph·x402를 결합해 <strong>인식(Perceive) → 추론(Reason) → 실행(Act) → 증빙(Prove)</strong> 루프를 구성했고, 담당 결제 구간은 HTTP 402 챌린지-응답(결제 요청 → USDC 송금 → 서명 재요청 → Solana devnet RPC 검증)으로 “결제가 확인되어야만 정산 완료”가 되도록 붙였습니다.</p>
-
-    <div class="diagram-title">Agentic Commerce — 자율 AI 에이전트 루프</div>
-    <div class="flow">
-      <div class="flow-step"><div class="t">01 Perceive</div><div class="s">RAG · 채팅·결제 수집</div></div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step"><div class="t">02 Reason</div><div class="s">Gemini 2.5-flash 정산</div></div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step hl"><div class="t">03 Act</div><div class="s">x402 온체인 송금</div></div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step"><div class="t">04 Prove</div><div class="s">Explorer 즉시 증빙</div></div>
-    </div>
-
-    <div class="role-grid">
-      <div class="dept">
-        <h4>일반 정산 챗봇</h4>
-        <p>단순 ‘계산’ 기능만 지원합니다. 이후 과정은 사용자가 앱을 이동하며 직접 수행해야 하는 파편화된 경험입니다.</p>
-      </div>
-      <div class="dept">
-        <h4>PayTrip Agent</h4>
-        <p>계산, 자율 실행, 온체인 검증까지 모든 과정을 하나로 완결합니다. 트랜잭션은 Solana devnet에서 Finalized되고 Explorer URL로 공개 검증됩니다.</p>
-      </div>
-    </div>
-
-    <div class="diagram-title">Architecture &amp; Workflow — RAG · LangGraph · x402</div>
+    <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">전체 구조와 담당 결제 흐름</h2></div>
+    <p class="sec-desc">전체 서비스는 여행 팩트 조회 → Python 정산 계산 → 송금 실행 → 결과 요약 순서입니다. LangGraph가 단계를 연결하고 Gemini는 정산 설명과 보고서를 생성합니다. 아래에는 제가 개발·검증한 로컬 결제 흐름을 자세히 표시했습니다.</p>
+    <div class="diagram-title">담당 구현 — HTTP 402 기반 결제 데모</div>
     <div class="infra">
-      <div class="infra-top"><span class="infra-badge">SYSTEM_READY · v1.0.402-BETA · Solana devnet</span></div>
-      <div class="infra-arrow-v">↕ 데이터 검색부터 온체인 실행까지</div>
+      <div class="infra-top"><span class="infra-badge">Python · Flask · Solana devnet</span></div>
       <div class="infra-containers">
-        <div class="container-box">
-          <div class="head">01 Data — RAG / ChromaDB</div>
-          <div class="body"><span>해커톤 데모 지식 베이스</span><span>시뮬레이션 검색 최적화</span><span>Vector chunks 8,000+ (시뮬레이션)</span><span>Simulations 500 JEJU (데모)</span></div>
-        </div>
-        <div class="container-box">
-          <div class="head">02 Reasoning — LangGraph</div>
-          <div class="body"><span>Vertex AI Gemini 2.5-flash</span><span>retrieve_facts</span><span>plan_settlement</span><span>guardrail_check</span><span>execute_x402</span><span>summarize</span></div>
-        </div>
-        <div class="container-box">
-          <div class="head">03 Protocol — x402</div>
-          <div class="body"><span>REQ → 402 Required</span><span>TXN → USDC Transfer</span><span>VER → On-chain Verify</span></div>
-        </div>
-        <div class="container-box">
-          <div class="head">04 Execution — Solana</div>
-          <div class="body"><span>devnet LIVE NETWORK</span><span>Circle USDC (SPL)</span><span>Explorer Signature</span></div>
-        </div>
-      </div>
-      <div class="runtime-bar">Runtime — GCP Cloud Run · Gemini (Vertex AI)</div>
-    </div>
-
-    <div class="diagram-title">x402 핸드셰이크 — HTTP 402 챌린지-응답</div>
-    <div class="infra">
-      <div class="infra-top"><span class="infra-badge">Solana devnet · USDC SPL transfer_checked</span></div>
-      <div class="infra-arrow-v">↕ 결제 요청 · 서명 · 온체인 검증</div>
-      <div class="infra-containers">
-        <div class="container-box">
-          <div class="head">1. 결제 요청</div>
-          <div class="body"><span>GET /x402/settle</span><span>서명 없음</span><span>402 PAYMENT-REQUIRED</span></div>
-        </div>
-        <div class="container-box">
-          <div class="head">2. USDC 송금</div>
-          <div class="body"><span>solders</span><span>solana-py</span><span>devnet 전송</span></div>
-        </div>
-        <div class="container-box">
-          <div class="head">3. 서명 재요청 · 검증</div>
-          <div class="body"><span>PAYMENT-SIGNATURE</span><span>RPC get_transaction</span><span>200 settled</span></div>
-        </div>
-      </div>
-      <div class="infra-services">
-        <div class="svc-box wide">
-          <div class="head">담당 모듈</div>
-          <div class="items"><span>재사용 결제 모듈</span><span>Flask x402 API 서버</span><span>LangGraph 결제 플로우 연동</span><span>위조/정상 서명 검증</span><span>Solana Explorer 증빙</span></div>
-        </div>
+        <div class="container-box"><div class="head">1. 결제 조건 확인</div><div class="body"><span>GET /reserve/&lt;item_id&gt;</span><span>402 + PAYMENT-REQUIRED</span><span>가격·수신 주소 파싱</span><span>선택적 예산 상한 검사</span></div></div>
+        <div class="container-box"><div class="head">2. USDC 송금</div><div class="body"><span>송신·수신 토큰 계정 확인</span><span>수신 계정이 없으면 생성</span><span>금액 단위 변환 · transfer_checked</span><span>거래 서명·RPC 제출</span></div></div>
+        <div class="container-box"><div class="head">3. 서명 재요청</div><div class="body"><span>동일 URL + PAYMENT-SIGNATURE</span><span>RPC get_transaction 조회</span><span>Confirmed 조건 · 결과 존재 확인</span><span>200 + 데모 응답</span></div></div>
       </div>
     </div>
-
-    <div class="diagram-title">일반 정산 봇 vs PayTrip</div>
-    <table class="compare-table">
-      <thead>
-        <tr>
-          <th>구분</th>
-          <th>General Bot</th>
-          <th>PayTrip (Agent)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>계산<br><span class="sub">REASONING</span></td>
-          <td>지원</td>
-          <td>지원 · Gemini 2.5-flash</td>
-        </tr>
-        <tr>
-          <td>실행<br><span class="sub">EXECUTION</span></td>
-          <td>미지원 (수동 송금)</td>
-          <td>자율 실행 · x402 + Solana</td>
-        </tr>
-        <tr>
-          <td>증빙<br><span class="sub">VERIFICATION</span></td>
-          <td>캡처본 공유</td>
-          <td>온체인 증빙 · Explorer URL (Public)</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="diagram-title">Target &amp; 도입 시나리오</div>
+    <p class="sec-desc">x402의 결제 요구·증빙 제출 개념을 적용한 단순화된 데모입니다. 실제 예약 업무를 처리하는 API는 아니며, 원본 서버의 확인 범위는 제출한 거래가 RPC에서 조회되는지까지입니다.</p>
     <div class="role-grid">
-      <div class="dept">
-        <h4>1차 타깃 — 결제 및 카드사</h4>
-        <p>신한카드, KG이니시스, KG모빌리언스, KSNET, 다우기술 등 주요 금융/PG 인프라와 결합합니다. 카드사 앱 내에 PayTrip 에이전트 기능을 플러그인 형태로 탑재하는 것을 1단계로 둡니다.</p>
-      </div>
-      <div class="dept">
-        <h4>확장 타깃 — 글로벌 플랫폼</h4>
-        <p>글로벌 여행 플랫폼(OTA) 및 B2B SaaS 기업을 통한 생태계 확장. 여행객은 기존 방식대로 카드를 사용해 서비스를 결제합니다.</p>
-      </div>
-    </div>
-
-    <div class="phase-grid">
-      <div class="phase">
-        <div class="k">PHASE 01</div>
-        <h4>임베드</h4>
-        <p>카드사 앱 내에 PayTrip 에이전트 기능을 플러그인 형태로 탑재합니다.</p>
-      </div>
-      <div class="phase">
-        <div class="k">PHASE 02</div>
-        <h4>선결제</h4>
-        <p>여행객은 기존 방식대로 카드를 사용하여 서비스를 결제합니다.</p>
-      </div>
-      <div class="phase">
-        <div class="k">PHASE 03</div>
-        <h4>자율 정산</h4>
-        <p>앱 내 에이전트가 자동으로 1/N 정산을 계산하고 즉시 실행합니다.</p>
-      </div>
-      <div class="phase">
-        <div class="k">PHASE 04</div>
-        <h4>완료</h4>
-        <p>국경 없는 정산이 완료되며 온체인 증빙이 실시간 제공됩니다.</p>
-      </div>
+      <div class="dept"><h4>직접 개발한 모듈</h4><p><code>call_paid_api()</code>가 HTTP 흐름을 처리하고, <code>execute_travel_payment()</code>가 송금 결과를 구성하며, <code>send_usdc()</code>가 실제 송금을 실행합니다.</p></div>
+      <div class="dept"><h4>팀의 최종 통합</h4><p>팀원은 송금 로직을 결제 클래스로 재구성했습니다. 최종 에이전트의 기본 경로는 HTTP 402 왕복 대신 결제·확인 함수를 직접 호출합니다.</p></div>
     </div>
   </section>
 
   <section id="troubleshooting">
-    <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">문제 해결</h2></div>
-    <p class="sec-desc">담당했던 결제 구간에서 구현·검증한 세 가지입니다.</p>
-
+    <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">주요 구현</h2></div>
     <div class="ts-card">
-      <div class="ts-head"><span class="ts-tag">x402</span><h3>HTTP 402 챌린지-응답을 송금·검증까지 한 사이클로</h3></div>
+      <div class="ts-head"><span class="ts-tag">API</span><h3>결제 요구와 실제 송금을 HTTP 흐름으로 연결</h3></div>
       <div class="ts-body">
-        <div class="ts-col">
-          <div class="cl">이슈 · 원인</div>
-          <p>정산이 끝나려면 결제 요청만으로 송금을 믿으면 안 되고, USDC 전송과 서명, 체인 확인이 같은 사이클 안에서 끝나야 했습니다.</p>
-        </div>
-        <div class="ts-col">
-          <div class="cl">해결 과정</div>
-          <ul>
-            <li>결제 요청 → USDC 송금 → 서명 재요청 → devnet RPC 검증 순으로 HTTP 402 챌린지-응답을 구성</li>
-            <li>x402 프로토콜 전체 사이클을 end-to-end로 구현하고 검증</li>
-          </ul>
-        </div>
-        <div class="ts-col result">
-          <div class="cl">결과</div>
-          <ul>
-            <li>402 핸드셰이크가 온체인 검증까지 이어지는 한 흐름으로 동작함을 확인</li>
-          </ul>
-        </div>
+        <div class="ts-col"><div class="cl">구현 목적</div><p>결제 조건을 받은 뒤 송금하고, 제출한 거래를 조회한 결과에 따라 API 응답을 반환하는 흐름이 필요했습니다.</p></div>
+        <div class="ts-col"><div class="cl">구현 내용</div><ul><li>Flask에서 가격·수신 주소를 담은 402 응답 반환</li><li>클라이언트에서 조건을 파싱하고 건당 가격 상한 검사</li><li>USDC 송금 후 거래 서명을 담아 재요청하고 RPC 조회</li></ul></div>
+        <div class="ts-col result"><div class="cl">확인 결과</div><p>미결제·가짜 서명 요청의 402 응답과 정상 송금 후 재요청의 200 응답을 직접 확인했습니다.</p></div>
       </div>
     </div>
-
     <div class="ts-card">
-      <div class="ts-head"><span class="ts-tag">Payment</span><h3>재사용 가능한 결제 모듈과 x402 API 서버</h3></div>
+      <div class="ts-head"><span class="ts-tag">Module</span><h3>송금 로직 분리와 단계별 실패 결과 구성</h3></div>
       <div class="ts-body">
-        <div class="ts-col">
-          <div class="cl">이슈 · 원인</div>
-          <p>에이전트 그래프 안에 송금 로직을 묻어두면 프로토콜을 따로 시연하거나 다른 경로에서 재사용하기 어려웠습니다.</p>
-        </div>
-        <div class="ts-col">
-          <div class="cl">해결 과정</div>
-          <ul>
-            <li>재사용 가능한 결제 모듈을 분리</li>
-            <li>Flask 기반 x402 API 서버를 구축해 핸드셰이크를 HTTP로 노출</li>
-          </ul>
-        </div>
-        <div class="ts-col result">
-          <div class="cl">결과</div>
-          <ul>
-            <li>결제 모듈과 API 서버를 에이전트와 독립적으로 호출·검증할 수 있게 됨</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="ts-card">
-      <div class="ts-head"><span class="ts-tag">Agent</span><h3>LangGraph 연동과 위조·정상 서명 검증</h3></div>
-      <div class="ts-body">
-        <div class="ts-col">
-          <div class="cl">이슈 · 원인</div>
-          <p>에이전트가 정산 실행 단계에서 결제를 호출할 때, 서명만 있으면 통과시키는 방식으로는 위조 서명을 걸러낼 수 없었습니다.</p>
-        </div>
-        <div class="ts-col">
-          <div class="cl">해결 과정</div>
-          <ul>
-            <li>LangGraph 에이전트에 결제 플로우를 연동</li>
-            <li>위조 서명과 정상 서명 케이스를 나눠 검증</li>
-            <li>Solana Explorer에서 온체인 거래 증빙을 확보</li>
-          </ul>
-        </div>
-        <div class="ts-col result">
-          <div class="cl">결과</div>
-          <ul>
-            <li>에이전트 실행 결과가 서명 검증과 Explorer 증빙까지 연결됨</li>
-          </ul>
-        </div>
+        <div class="ts-col"><div class="cl">설계 목적</div><p>에이전트 통합 전에도 결제를 독립적으로 실행·검증하고, 실패한 단계를 구분할 수 있도록 구성했습니다.</p></div>
+        <div class="ts-col"><div class="cl">구현 내용</div><ul><li>HTTP 호출·송금·결과 구성을 함수별로 분리</li><li>토큰 계정 준비·정수 금액 변환·거래 서명과 제출 처리</li><li>송금 후 API 재요청이 실패해도 서명과 Explorer URL을 반환 결과에 보존</li></ul></div>
+        <div class="ts-col result"><div class="cl">협업 결과</div><p>입력·반환 구조와 호출 예제를 문서화해 팀원에게 전달했습니다. 팀원은 이를 바탕으로 에이전트의 결제 실행 구간에 통합했습니다.</p></div>
       </div>
     </div>
   </section>
 
   <section id="achievements">
-    <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">주요 성과</h2></div>
-
-    <div class="ach-list">
-      <div class="ach-item">
-        <div class="ach-idx">01</div>
-        <div class="ach-text">
-          <p class="lead">x402 프로토콜 전체 사이클을 end-to-end로 구현·검증</p>
-          <p>HTTP 402 챌린지-응답 사이클(결제 요청 → USDC 송금 → 서명 재요청 → devnet RPC 검증)을 한 흐름으로 동작하게 만들었습니다.</p>
-        </div>
-      </div>
-      <div class="ach-item">
-        <div class="ach-idx">02</div>
-        <div class="ach-text">
-          <p class="lead">재사용 가능한 결제 모듈과 Flask x402 API 서버 구축</p>
-          <p>결제 로직을 모듈로 분리하고 Flask 기반 API 서버로 프로토콜을 노출해, 에이전트 밖에서도 같은 사이클을 호출할 수 있게 했습니다.</p>
-        </div>
-      </div>
-      <div class="ach-item">
-        <div class="ach-idx">03</div>
-        <div class="ach-text">
-          <p class="lead">에이전트 연동과 온체인 거래 증빙 확보</p>
-          <p>LangGraph 에이전트에 결제 플로우를 붙이고, 위조/정상 서명 케이스를 검증했으며 Solana Explorer로 온체인 거래 증빙을 남겼습니다.</p>
-        </div>
-      </div>
-    </div>
+    <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">검증 결과</h2></div>
+    <p class="sec-desc">본인 지갑을 사용한 로컬 API 호출과 Solana devnet 거래로 직접 확인했습니다. 자동화 테스트 성공률이나 실제 서비스 운영 지표를 측정한 결과는 아닙니다.</p>
+    <table class="compare-table">
+      <thead><tr><th>검증 항목</th><th>방법</th><th>확인 결과</th></tr></thead>
+      <tbody>
+        <tr><td>미결제·가짜 서명</td><td>서명 없이 또는 가짜 서명으로 API 요청</td><td><strong>HTTP 402</strong> 응답 확인</td></tr>
+        <tr><td>정상 결제 흐름</td><td>devnet 송금 후 거래 서명을 담아 동일 API에 재요청</td><td><strong>HTTP 200</strong> 응답 확인</td></tr>
+        <tr><td>거래 실행</td><td>반환된 서명으로 Explorer 거래 내역과 테스트 지갑의 금액 변화 대조</td><td>devnet 거래 실행 내역 확인</td></tr>
+      </tbody>
+    </table>
   </section>
 
   <section id="retrospective">
-    <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">회고 · 배운 점</h2></div>
-
-    <blockquote class="retro">
-      담당 범위는 x402 전체 사이클을 end-to-end로 붙이고, Flask API와 LangGraph 결제 연동에서 위조·정상 서명을 가린 뒤 Solana Explorer로 온체인 거래 증빙을 남기는 일이었습니다.
-    </blockquote>
-
+    <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">회고 · 보완 방향</h2></div>
     <div class="takeaways">
-      <div class="takeaway">
-        <div class="tk-label">배움 01</div>
-        <p>x402는 상태 코드 하나가 아니라, 결제 요청 → 송금 → 서명 재요청 → RPC 검증이 끊기지 않아야 하는 프로토콜입니다. 이 사이클을 end-to-end로 붙여 본 것이 핵심이었습니다.</p>
-      </div>
-      <div class="takeaway">
-        <div class="tk-label">배움 02</div>
-        <p>결제 모듈과 API 서버를 에이전트와 분리해 두니, 프로토콜 자체와 에이전트 연동을 따로 검증할 수 있었습니다.</p>
-      </div>
-      <div class="takeaway">
-        <div class="tk-label">배움 03</div>
-        <p>위조 서명과 정상 서명을 나눠 보고, Solana Explorer로 거래를 열어보는 과정이 “보냈는가”에 대한 답을 코드 밖의 증빙으로 남기는 방법이었습니다.</p>
-      </div>
+      <div class="takeaway"><div class="tk-label">호출 계약의 중요성</div><p>결제 기능을 모듈로 분리하고 입력·반환 구조를 정리해, 팀원이 내부 송금 구현을 복사하지 않고 활용할 수 있도록 했습니다.</p></div>
+      <div class="takeaway"><div class="tk-label">외부 연동의 실패 경계</div><p>송금 제출, 체인 조회, API 응답은 서로 다른 단계입니다. 송금 후 API가 실패했다고 전체 함수를 다시 실행하면 중복 송금이 발생할 수 있어, 거래 정보를 보존하는 것과 재실행을 안전하게 만드는 것은 구분해야 합니다.</p></div>
+      <div class="takeaway"><div class="tk-label">서비스화 시 보완할 점</div><p>현재 서버는 금액·수신자·토큰과 주문의 일치 여부, 거래 실행 오류, 서명 재사용까지 검사하지 않습니다. 서비스화하려면 주문·거래 상태를 저장하고 결제 조건 검증과 중복 실행 방지를 추가해야 합니다.</p></div>
     </div>
   </section>
 
@@ -382,8 +142,8 @@
 <nav class="page-nav page-nav-side">
   <a href="#summary">01 요약</a>
   <a href="#architecture">02 구조</a>
-  <a href="#troubleshooting">03 문제 해결</a>
-  <a href="#achievements">04 성과</a>
+  <a href="#troubleshooting">03 구현</a>
+  <a href="#achievements">04 검증</a>
   <a href="#retrospective">05 회고</a>
 </nav>
 </div>

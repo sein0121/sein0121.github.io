@@ -33,12 +33,12 @@
     <a class="back-link" href="index.html#projects">← 전체 프로젝트로</a>
     <div class="eyebrow">신한라이프 · 생성형 AI 프로젝트</div>
     <h1 class="title">AIPF — 보기·납기 입력 자동화</h1>
-    <p class="lede">정식 프로젝트명 — 신한라이프 생성형AI 활용한 PF시스템 내 보기·납기 입력 자동화(AIPF) 구축. 보험 상품 정보 관리의 핵심 업무를 AI 기반으로 자동화해, 상품 개발 업무의 속도와 정확도를 함께 개선했습니다.</p>
+    <p class="lede">정식 프로젝트명 — 신한라이프 생성형AI 활용한 PF시스템 내 보기·납기 입력 자동화(AIPF) 구축. 보험 기초서류에서 보기·납기 정보를 생성형 AI로 추출해 PF 시스템에 반영하는 과정을 자동화한 프로젝트로, 저는 문서 구조화(Parser)를 솔루션 위에 커스텀 개발하고, 구조화부터 정보 추출·필터링·DB 적재까지 잇는 비동기 백엔드 파이프라인을 설계·구현했습니다.</p>
     <div class="metarow">
-      <div class="metacell"><div class="k">PERIOD</div><div class="v">2025.07.07 – 2025.12.05<br>(5개월)</div></div>
-      <div class="metacell"><div class="k">CONTRIBUTION</div><div class="v">파이프라인 개발<br>70% 기여</div></div>
-      <div class="metacell"><div class="k">ROLE</div><div class="v">Worker·Queue 구성 및<br>상태관리·재처리 구조 구현</div></div>
-      <div class="metacell"><div class="k">STACK</div><div class="v">Python · FastAPI · Redis<br>+ LLM inference</div></div>
+      <div class="metacell"><div class="k">PERIOD</div><div class="v">2025.07.07 – 2025.12.05</div></div>
+      <div class="metacell"><div class="k">CONTRIBUTION</div><div class="v">파이프라인 개발 작업의<br>70%</div></div>
+      <div class="metacell"><div class="k">ROLE</div><div class="v">문서 구조화 커스텀 개발 ·<br>비동기 파이프라인 · 재처리 · DB 적재</div></div>
+      <div class="metacell"><div class="k">STACK</div><div class="v">Python · FastAPI · Celery<br>Redis · LLM API 연동</div></div>
     </div>
   </header>
 
@@ -49,18 +49,26 @@
     <div class="summary-stack">
       <div class="summary-bg">
         <p><strong>배경.</strong> 기존 보기납기 업무는 작업자가 MCP에서 기초서류를 직접 색인하고 문서를 확인해 보기납기 정보를 수기로 입력한 뒤 PF 시스템에 반영하는 방식으로 운영되었습니다. 상품 출시 전 문서가 반복적으로 수정되면서 기존 작업을 재수행해야 했고, 그 결과 최대 35일의 업무 기간과 휴먼 에러 가능성이 함께 발생했습니다.</p>
-        <p>AIPF는 이 입력 과정을 생성형 AI 기반 ETL 파이프라인으로 자동화해, <strong>문서 구조화 → 정보 추출 → 코드 매핑</strong>까지 이어지는 흐름을 시스템화하는 것을 목표로 시작한 프로젝트입니다. 형식이 제각각인 문서에서 규칙 기반 추출이 어려웠던 점, MCP와 PF 간 코드 체계가 달라 결과를 연결하기 어려웠던 점, 문서가 수시로 개정되는 환경에서 최신본을 실시간·배치로 반영해야 했던 점, 대량 문서 처리 중 특정 단계 지연이 전체 파이프라인에 영향을 주는 구조적 문제까지 함께 풀어야 했습니다.</p>
+        <p>AIPF는 이 입력 과정을 <strong>문서 구조화 → 생성형 정보 추출 → 코드 매핑·필터링</strong>으로 이어지는 파이프라인으로 자동화하는 프로젝트입니다. 정보 추출 로직은 데이터분석가 팀이 담당했고, 저는 솔루션 파서에 커스텀 확장을 추가해 문서 구조화를 개발하고, 구조화 결과를 추출·필터링·DB 적재로 잇는 백엔드를 맡았습니다.<br>제 영역에서 풀어야 했던 문제는 네 가지였습니다. 형식이 제각각인 문서의 병합 셀·중첩 표·취소선을 후속 단계가 쓸 수 있는 일관된 구조로 바꾸는 것, LLM 추론처럼 오래 걸리는 처리가 API 요청을 막지 않게 하는 것, 여러 Worker가 병렬로 처리한 문서들의 완료 시점을 판단해 다음 단계 호출이 중복되지 않게 하는 것, 그리고 문서가 수시로 개정되는 환경에서 실패하거나 바뀐 부분만 안전하게 다시 처리하는 것입니다.</p>
       </div>
 
       <div class="infopanel">
-        <div class="inforow"><div class="label">기간</div><div class="value">2025.07.07 – 2025.12.05 (5개월)</div></div>
-        <div class="inforow"><div class="label">인원</div><div class="value">전체 파이프라인 개발 작업의 70%를 담당</div></div>
+        <div class="inforow"><div class="label">기간</div><div class="value">2025.07.07 – 2025.12.05</div></div>
+        <div class="inforow"><div class="label">인원</div><div class="value">PM, PL, 연계시스템 개발자 2명, 솔루션 개발자 1명, 데이터분석가 2명<br>파이프라인 개발 작업의 70% 담당</div></div>
         <div class="inforow"><div class="label">담당 개발</div><div class="value">
-          LLM을 실제 업무 시스템에 통합하는 백엔드·파이프라인 개발 담당<br>
-          · Worker·Queue 구성 — OCR→Parser 결과 전달, Extract 문서 단위 병렬 처리, Filtering 코드매핑·후처리<br>
-          · Redis 기반 작업 상태 관리 및 Barrier 동기화 로직 구현<br>
-          · 실패 문서만 재처리 가능한 상태 기반 재처리 구조 구현<br>
+          문서 구조화 커스텀 개발 및 LLM 기반 추출 로직을 업무 시스템에 통합하는 백엔드·파이프라인 개발 담당<br>
+          · 솔루션 파서의 커스텀 확장(훅)으로 사업방법서·판매예규·별첨 문서 구조화 개발 — 섹션·문단 트리 재구성, 병합 셀·중첩 표·취소선 처리<br>
+          · 구조화 결과 검증 후 파싱 상태 DB 기록 및 정보 추출 서비스 호출, 파싱 오류 시 1회 자동 재요청 처리<br>
+          · 구조화부터 Extract → Filtering까지 잇는 서비스 간 API 연동, Extract·Filtering의 Celery Queue/Worker 구성 및 단계별 Worker 수 설정 (Parser 2 / Extract 6 / Filtering 2)<br>
+          · Extract → Filtering 전이의 Barrier 동기화 구현 — DB로 잔여 문서 수를 판정하고, Redis HSETNX로 한 Worker만 Filtering API 호출 권한 획득<br>
+          · Extract 문서 단위 자동 재시도, Filtering 대표보종명 단위 부분 재실행(해당 범위 삭제 후 재적재) 구조 구현<br>
+          · 결과 DB 적재를 행 단위 호출에서 1000행 단위 배치 요청(SQL 프록시 insertBatch)으로 전환<br>
+          · 버전별 중간 결과 파일 저장 구조 및 문서·단계별 처리 상태 기록 설계<br>
           · 솔루션 이슈 관리 및 커뮤니케이션 담당
+        </div></div>
+        <div class="inforow"><div class="label">관련 자료</div><div class="value">
+          · 특허 공동 출원 — AI 기반 문서 구조화 / 속성 추출 (출원번호 10-2025-0195025)<br>
+          · 언론 보도 — <a href="https://www.mt.co.kr/industry/2026/01/09/2026010910541952783" target="_blank" rel="noopener noreferrer">신한라이프 AIPF 자동화 시스템 관련 기사 (머니투데이, 2026.01)</a>
         </div></div>
       </div>
 
@@ -68,11 +76,11 @@
         <h4>Application</h4>
         <div class="chips"><span class="chip">Python</span><span class="chip">FastAPI</span></div>
         <h4>비동기 처리</h4>
-        <div class="chips"><span class="chip">Redis</span><span class="chip">Queue / Worker</span></div>
+        <div class="chips"><span class="chip">Celery</span><span class="chip">Redis</span><span class="chip">Queue / Worker</span></div>
         <h4>AI</h4>
-        <div class="chips"><span class="chip">LLM inference 연동</span></div>
+        <div class="chips"><span class="chip">LLM API 연동</span></div>
         <h4>Infra</h4>
-        <div class="chips"><span class="chip">Docker</span><span class="chip">Makefile</span></div>
+        <div class="chips"><span class="chip">Docker</span><span class="chip">Docker Compose</span><span class="chip">Makefile</span></div>
         <h4>협업 툴</h4>
         <div class="chips"><span class="chip">Notion</span></div>
       </div>
@@ -82,7 +90,7 @@
   <!-- 02 프로젝트 구조 -->
   <section id="architecture">
     <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">프로젝트 구조 · 아키텍처</h2></div>
-    <p class="sec-desc">시스템은 <strong>MCP 연동 → 문서 구조화(Parser) → 생성형 정보 추출(Extract) → 코드매핑·조건필터링(Filtering)</strong>의 4단계로 구성됩니다. 처리 안정성을 위해 세 단계를 하나의 흐름으로 묶지 않고, 단계마다 독립된 Queue/Worker로 분리했습니다.</p>
+    <p class="sec-desc">문서 구조화(Parser), 정보 추출(Extract), 코드매핑·필터링(Filtering)은 각각 독립된 컨테이너로 동작합니다. <strong>서비스 사이는 HTTP API로 트리거하고, 서비스 내부는 Celery Queue/Worker로 처리</strong>해, 장시간 작업이 API를 막지 않고 단계별로 독립적으로 조절·배포할 수 있게 설계했습니다.</p>
 
     <div class="diagram-title">전체 연계 흐름</div>
     <div class="flow">
@@ -97,41 +105,49 @@
       <div class="flow-step"><div class="t">PF시스템</div><div class="s">보기·납기 반영</div></div>
     </div>
 
-    <div class="diagram-title">단계별 Queue/Worker 분리 구조</div>
+    <div class="diagram-title">서비스 연결 및 Queue/Worker 구조</div>
     <div class="infra">
-      <div class="infra-top"><span class="infra-badge">LLM inference 연동 — Extract 단계</span></div>
+      <div class="infra-top"><span class="infra-badge">LLM API 연동 — Extract 단계</span></div>
       <div class="infra-arrow-v">↕ 문서 단위 추론 요청 · 결과 반환</div>
       <div class="infra-containers">
         <div class="container-box">
-          <div class="head">문서 구조화 (Parser)</div>
-          <div class="body"><span>Python</span><span>FastAPI</span><span>Worker</span></div>
+          <div class="head">문서 구조화 (Parser · 커스텀 확장)</div>
+          <div class="body"><span>Worker × 2</span><span>구조화 커스텀 훅</span><span>버전별 결과·diff 저장</span><span>→ Extract API 호출</span></div>
         </div>
         <div class="container-box">
           <div class="head">정보 추출 (Extract)</div>
-          <div class="body"><span>Python</span><span>FastAPI</span><span>Worker</span></div>
+          <div class="body"><span>Worker × 6 (concurrency 6)</span><span>FastAPI</span><span>Celery · extract_q</span></div>
         </div>
         <div class="container-box">
           <div class="head">코드맵핑·필터링 (Filtering)</div>
-          <div class="body"><span>Python</span><span>FastAPI</span><span>Worker</span></div>
+          <div class="body"><span>Worker × 2</span><span>FastAPI</span><span>Celery · filter_q</span></div>
         </div>
       </div>
       <div class="infra-services">
         <div class="svc-box wide">
-          <div class="head">Redis — Queue · 상태관리 · Barrier 동기화</div>
-          <div class="items"><span>단계별 작업 Queue</span><span>문서 처리 상태 관리</span><span>Barrier 동기화</span><span>실패 문서 상태 기반 재처리</span></div>
+          <div class="head">Redis — Celery Broker · 후속 단계 호출 권한</div>
+          <div class="items"><span>extract_q / filter_q 작업 전달</span><span>HSETNX 기반 Filtering 호출 권한 획득</span><span>배치 메타 (batch:{task_id}:meta)</span></div>
+        </div>
+        <div class="svc-box wide">
+          <div class="head">DB (SQL 프록시 API 경유) — 상태 · 완료 판정 · 결과 적재</div>
+          <div class="items"><span>문서·단계별 처리 상태</span><span>잔여 문서 수 기반 완료 판정</span><span>1000행 단위 배치 적재</span></div>
         </div>
       </div>
-      <div class="runtime-bar">Container Runtime — Docker (Makefile 기반 빌드·운영 자동화)</div>
+      <div class="runtime-bar">Container Runtime — Docker Compose (API: Gunicorn + Uvicorn Worker · 처리: Celery Worker)</div>
     </div>
 
     <div class="principles">
       <div class="principle">
-        <div class="p-label">설계 원칙 01 — 단계별 Queue/Worker 분리</div>
-        <p>Parser → Extract → Filtering을 하나의 동기 흐름으로 묶지 않고 단계마다 독립된 Queue/Worker로 분리했습니다. 특정 단계가 지연되거나 실패해도 전체 파이프라인으로 전파되지 않고, 병렬 Worker 구조로 대량 문서를 처리할 수 있습니다.</p>
+        <div class="p-label">설계 원칙 01 — 서비스 경계는 HTTP, 서비스 내부는 Queue</div>
+        <p>초기에는 추출·필터링이 API 핸들러 안에서 동기로 실행되었고, 추출 Worker가 필터링 Queue에 작업을 직접 넣는 구조였습니다. API는 작업만 접수하고 즉시 응답하도록 바꾸고, 서비스 간은 API 계약만 공유하도록 HTTP로 연결했습니다. 한 서비스의 내부 구현이 바뀌어도 다른 서비스를 고칠 필요가 없고, 단계별 Worker 수를 따로 조절할 수 있습니다. 실제로 LLM 호출이 몰리는 Extract는 Worker concurrency를 6으로, Parser와 Filtering은 각 2로 차등 구성했습니다.</p>
       </div>
       <div class="principle">
-        <div class="p-label">설계 원칙 02 — 상태 기반 재처리</div>
-        <p>Redis 기반으로 문서 단위 처리 상태(성공·실패·대기)를 관리해, 실패한 문서만 골라 재처리할 수 있는 구조를 만들었습니다. 문서가 수시로 개정되는 환경에서도 전체를 다시 돌리지 않고 필요한 부분만 다시 처리합니다.</p>
+        <div class="p-label">설계 원칙 02 — 판정은 DB, 실행 권한은 Redis</div>
+        <p>배치 완료 여부는 DB에서 잔여 대기 문서 수로 판정하고, 잔여 문서가 0일 때 Redis HSETNX로 동시에 완료한 워커 중 한 워커만 Filtering API 호출 권한을 얻도록 했습니다.</p>
+      </div>
+      <div class="principle">
+        <div class="p-label">설계 원칙 03 — 다시 실행해도 안전한 최소 단위로 재처리</div>
+        <p>단계별 중간 결과와 처리 상태를 남기고, 재처리는 문서 또는 대표보종명 단위로 한정했습니다. Filtering 부분 재실행 시에는 해당 범위의 기존 데이터를 지우고 다시 적재해 결과가 중복 적재되지 않게 했습니다.</p>
       </div>
     </div>
   </section>
@@ -139,158 +155,161 @@
   <!-- 03 문제 해결 -->
   <section id="troubleshooting">
     <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">문제 해결</h2></div>
-    <p class="sec-desc">파이프라인을 프로덕션 수준까지 끌어올리는 과정에서 마주한 핵심 이슈와 해결 과정입니다.</p>
+    <p class="sec-desc">파이프라인을 운영 가능한 수준으로 만드는 과정에서 마주한 핵심 이슈와 해결 과정입니다. 결과 칸에서 <strong>“기대 효과”</strong>로 표시한 항목은 구조 변경으로 의도한 효과이며, 운영 로그로 별도 검증하지는 못한 내용입니다.</p>
 
     <div class="ts-card">
-      <div class="ts-head"><span class="ts-tag">Extract</span><h3>여러 Worker가 동시에 끝내도 다음 단계는 정확히 한 번만 — Barrier 동기화</h3></div>
+      <div class="ts-head"><span class="ts-tag">Parser</span><h3>문서마다 다른 표 구조 — 솔루션 파서 위에 커스텀 구조화 개발</h3></div>
       <div class="ts-body">
         <div class="ts-col">
           <div class="cl">이슈 · 원인</div>
-          <p>대량 문서를 여러 Worker가 병렬로 처리하는 비동기 환경에서, 마지막 문서가 끝났을 때만 다음 단계(Filtering)를 정확히 한 번 호출해야 하는 문제가 있었습니다. 비동기 구조 특성상 단계별 완료 시점을 판단하기 어려웠고, Redis 카운터만으로는 중복 호출 또는 누락 위험이 있었습니다.</p>
+          <p>솔루션 파서가 주는 결과는 문단·표 요소의 나열이라, 어떤 표가 어떤 섹션에 속하는지 알 수 없었습니다. 또 문서마다 병합 셀과 표 안의 표(중첩 표)가 많고, 선언된 행/열 수와 실제 HTML 태그 수가 어긋나는 경우가 있었으며, 개정 이력인 취소선 내용까지 섞여 있어 그대로는 정보 추출에 쓸 수 없었습니다.</p>
         </div>
         <div class="ts-col">
           <div class="cl">해결 과정</div>
           <ul>
-            <li>문서 처리 완료 시마다 남은 처리 건수(pending count)를 다시 조회해 이중 확인</li>
-            <li>잔여 건수가 0일 때 Redis HSETNX 원자적 연산으로 트리거 권한을 단 하나의 Worker만 획득하도록 Barrier 동기화 로직 구현</li>
-            <li>예외 발생 시 1회 재시도 후, 재시도도 실패하면 해당 건만 실패 상태로 기록</li>
+            <li>솔루션의 커스텀 확장(훅)에 구조화 로직을 추가 개발 — 제목 패턴과 표 등장 위치로 본문을 섹션·문단 트리로 재구성</li>
+            <li>병합 범위를 2차원 그리드에 복제하고, 행/열 수 불일치를 실제 태그 기준으로 보정, 중첩 표는 재귀적으로 파싱</li>
+            <li>취소선 구간을 제거하고, 취소로 비게 된 행은 삭제해 현행 내용만 남김</li>
+            <li>문서명·필수 대제목이 없으면 파싱 실패로 기록하고, 이전 버전과 비교한 변경점(diff) 파일 생성</li>
           </ul>
         </div>
         <div class="ts-col result">
           <div class="cl">결과</div>
           <ul>
-            <li>여러 Worker가 동시에 마지막 문서를 끝내도 다음 단계가 정확히 한 번만 호출됨을 보장</li>
-            <li>특정 단계의 지연·실패가 전체 처리에 전이되지 않는 구조 확보로 운영 안정성 개선</li>
+            <li>사업방법서·판매예규·별첨을 하나의 일관된 JSON 구조로 산출해 후속 추출 단계의 입력 형식 통일</li>
+            <li>구조가 깨진 문서는 추출 전에 걸러내 LLM 호출 낭비와 잘못된 결과 전파 방지</li>
           </ul>
         </div>
       </div>
     </div>
 
     <div class="ts-card">
-      <div class="ts-head"><span class="ts-tag">Extract</span><h3>LLM 응답의 형식 불안정성 — 이상 문자와 재현성</h3></div>
+      <div class="ts-head"><span class="ts-tag">Extract → Filtering</span><h3>동시에 끝난 여러 Worker 중 한 Worker만 다음 단계를 호출 — Barrier 동기화</h3></div>
       <div class="ts-body">
         <div class="ts-col">
           <div class="cl">이슈 · 원인</div>
-          <p>프롬프트와 입력이 동일해도 LLM 추론 결과에 의도치 않은 한자(CJK) 혼입 등 예기치 않은 형식 오류가 발생해, 단순 호출만으로는 후속 파이프라인이 깨지는 문제가 있었습니다.</p>
+          <p>필터링은 한 배치의 문서들을 서로 비교하는 작업이라, DB상 잔여 대기 문서가 0이 된 시점에 한 번만 호출되어야 했습니다. 초기에는 Redis 카운터로 완료 건수를 셌는데, Celery 자동 재시도로 같은 문서가 두 번 집계될 수 있었고, 트리거 여부를 읽은 뒤 쓰는 사이에 다른 Worker가 끼어드는 경쟁 조건도 있었습니다.</p>
         </div>
         <div class="ts-col">
           <div class="cl">해결 과정</div>
           <ul>
-            <li>LLM inference 연동 시 temperature=0, seed=0으로 고정해 재현성 확보</li>
-            <li>CJK 이상 문자 등 도메인 특화 이상 패턴을 감지해 최대 3회 재시도하는 검증 로직 구현</li>
-            <li>문서 단위 실패 건에는 LLM 재시도와 별개의 상위 재시도 레이어를 추가</li>
+            <li>완료 판정 기준을 Redis 카운터에서 DB 문서 상태로 이동 — Worker는 자기 문서 상태를 갱신한 뒤 잔여 문서 수를 조회</li>
+            <li>잔여 문서가 0이면 Redis HSETNX로 트리거 플래그 설정을 시도해, 설정에 성공한 한 Worker만 필터링 API 호출 권한을 획득</li>
+            <li>완료 처리를 finally 블록에 두어 실패 문서도 실패 상태로 기록된 뒤 집계되도록 구성</li>
           </ul>
         </div>
         <div class="ts-col result">
           <div class="cl">결과</div>
           <ul>
-            <li>형식이 불안정한 응답으로 인한 후속 단계 실패율 감소</li>
-            <li>기초서류 구조화·속성 추출 정확도를 100%에 가까운 수준까지 끌어올리는 데 기여</li>
+            <li>재시도로 인한 중복 집계를 막고, 여러 Worker가 동시에 완료해도 Filtering API 호출 권한은 한 Worker만 획득</li>
+            <li>일부 문서가 실패해도 배치 전체가 다음 단계로 넘어가지 못하고 멈추는 상황 방지</li>
           </ul>
         </div>
       </div>
     </div>
 
     <div class="ts-card">
-      <div class="ts-head"><span class="ts-tag">Parser</span><h3>문서마다 다른 표 구조 — 병합 셀과 중첩 표</h3></div>
+      <div class="ts-head"><span class="ts-tag">API</span><h3>장시간 처리 중 Gunicorn WORKER TIMEOUT — 요청 흐름에서 처리 분리</h3></div>
       <div class="ts-body">
         <div class="ts-col">
           <div class="cl">이슈 · 원인</div>
-          <p>형식이 제각각인 문서마다 병합된 셀과 중첩 표가 많아, 기존 룰 기반 엔진과 단순 텍스트 추출로는 원하는 구조화 데이터를 얻기 어려웠습니다.</p>
+          <p>매칭 처리 중 Gunicorn WORKER TIMEOUT과 함께 워커가 강제 종료되었습니다. 처리 시간 초과와 컨테이너 메모리 부족을 원인 후보로 놓고 코드 구조를 대조한 결과, async 핸들러 안에서 동기 pandas 연산이 길게 실행되며 이벤트 루프가 막히고, 그로 인해 워커 생존 신호가 끊기는 구조를 1순위 원인으로 좁혔습니다.</p>
         </div>
         <div class="ts-col">
           <div class="cl">해결 과정</div>
           <ul>
-            <li>제목 정규식과 표 등장 시점을 기준으로 본문을 섹션·문단 트리로 재구성하는 단일 패스 상태머신 구현</li>
-            <li>rowspan/colspan 병합 범위를 2차원 그리드에 복제하고, 선언된 행/열 수와 실제 태그 수 불일치를 보정</li>
-            <li>문서 종류별 파일명 라우팅으로 서로 다른 파서·후처리 로직 적용</li>
+            <li>docker stats로 메모리·CPU를 관찰해 메모리 원인과 시간 원인을 구분하는 검증 방법 수립</li>
+            <li>반복 DataFrame 연산, 후보 조합 생성량, 결과 누적량 등 처리 함수 내부의 부하 지점 식별</li>
+            <li>처리를 API 핸들러에서 Celery Worker로 옮기고, API는 작업 접수 후 즉시 응답하도록 변경</li>
           </ul>
         </div>
         <div class="ts-col result">
           <div class="cl">결과</div>
           <ul>
-            <li>서로 다른 문서 유형을 하나의 파이프라인에서 안정적인 구조화 데이터로 산출</li>
-            <li>표 병합·불일치 엣지케이스 처리로 후속 정보 추출 단계의 입력 품질 확보</li>
+            <li>API는 처리 시간과 무관하게 작업 접수 후 즉시 응답하는 구조로 변경</li>
+            <li>장시간 처리가 HTTP 요청 수명과 분리되어, 요청이 처리 완료를 기다리다 타임아웃되는 구조 해소</li>
           </ul>
         </div>
       </div>
     </div>
-
-    <!-- <div class="ts-card">
-      <div class="ts-head"><span class="ts-tag">Filtering</span><h3>MCP·PF 코드 체계 불일치와 상품·보종 매칭 누락</h3></div>
-      <div class="ts-body">
-        <div class="ts-col">
-          <div class="cl">이슈 · 원인</div>
-          <p>MCP와 PF 간 코드 체계가 달라 상품·보종 단위로 결과를 연결하기 어려웠고, 추출된 보종명·상품명도 약어·띄어쓰기·오탈자 등으로 표준 명칭과 정확히 일치하지 않는 경우가 많아 완전 일치 매칭으로는 누락이 많았습니다.</p>
-        </div>
-        <div class="ts-col">
-          <div class="cl">해결 과정</div>
-          <ul>
-            <li>완전 일치 대신 토큰 단위로 쪼갠 뒤 F1 스코어(정밀도·재현율의 조화평균)로 유사도 계산</li>
-            <li>F1 스코어가 기준 미달인 저신뢰 매칭만 별도로 분리해 담당자가 재확인하는 human-in-the-loop 프로세스 설계</li>
-            <li>담당자가 재매핑하면 코드 매칭 단계는 건너뛰고 이후 필터링 단계만 부분 재실행</li>
-          </ul>
-        </div>
-        <div class="ts-col result">
-          <div class="cl">결과</div>
-          <ul>
-            <li>표기 차이가 있는 항목도 자동 매칭 커버리지에 포함시키면서 낮은 신뢰도 건은 사람이 검증하는 이중 안전장치 확보</li>
-            <li>필터링 단계 단독 재실행으로 매핑 오류 수정 시 전체 파이프라인 재처리 비용 제거</li>
-          </ul>
-        </div>
-      </div>
-    </div> -->
 
     <div class="ts-card">
-      <div class="ts-head"><span class="ts-tag">전체</span><h3>대량 문서 처리 중 일부 실패 — 상태 기반 재처리 구조</h3></div>
+      <div class="ts-head"><span class="ts-tag">DB</span><h3>다건 결과 적재의 긴 처리 시간 — 행 단위 호출에서 배치 요청으로</h3></div>
       <div class="ts-body">
         <div class="ts-col">
           <div class="cl">이슈 · 원인</div>
-          <p>대량 문서를 처리하는 과정에서 일부 문서만 실패해도 배치 전체를 다시 돌리면 이미 처리된 문서까지 중복 처리되어 비용이 컸고, 문서가 수시로 개정되는 환경에서는 최신 문서만 다시 반영할 방법이 필요했습니다.</p>
+          <p>결과를 DB에 적재할 때 행마다 SQL 프록시 API로 HTTP 요청을 보내 호출 횟수가 행 수만큼 늘었고, 다건 적재에 걸리는 시간과 트랜잭션이 길어졌습니다.</p>
         </div>
         <div class="ts-col">
           <div class="cl">해결 과정</div>
           <ul>
-            <li>Redis에 문서 단위 처리 상태(성공·실패·대기)를 기록하는 상태 관리 구조 설계</li>
-            <li>실패 문서만 골라 해당 Queue에 재적재해 재처리하는 상태 기반 재처리 로직 구현</li>
-            <li>단계별로 Queue/Worker를 분리해, 재처리가 다른 단계의 정상 처리 흐름에 영향을 주지 않도록 격리</li>
+            <li>1차: HTTP 클라이언트를 공유하고 스레드 풀로 행 단위 호출을 병렬화 — 연결 비용은 줄었지만 호출 횟수는 그대로</li>
+            <li>2차: 결과를 1000행 단위로 묶어 SQL 프록시의 배치 적재(insertBatch) 요청 1회로 전송하도록 전환</li>
+            <li>연결 수 제한을 둔 HTTP 클라이언트를 재사용해 프록시 서버 부하 통제</li>
           </ul>
         </div>
         <div class="ts-col result">
           <div class="cl">결과</div>
           <ul>
-            <li>실패 문서만 선택적으로 재처리해 불필요한 중복 처리 제거</li>
-            <li>문서 1건당 약 10초 수준의 처리 속도를 병렬 Worker 구조로 안정적으로 유지</li>
+            <li>적재 요청 수를 행 수 기준에서 1000행당 1회로 축소</li>
+            <li>요청 하나가 처리하는 범위를 청크 단위로 제한해 적재 시간과 트랜잭션 부담 완화</li>
           </ul>
         </div>
       </div>
     </div>
+
+    <div class="ts-card">
+      <div class="ts-head"><span class="ts-tag">전체</span><h3>일부 문서 실패와 잦은 문서 개정 — 실패 구간만 안전하게 재처리</h3></div>
+      <div class="ts-body">
+        <div class="ts-col">
+          <div class="cl">이슈 · 원인</div>
+          <p>일부 문서만 실패해도 배치 전체를 다시 돌리면 이미 끝난 파싱과 비용이 큰 LLM 추론까지 반복하게 됩니다. 또 재실행 시 이미 적재된 결과 위에 같은 데이터가 중복으로 쌓일 위험이 있었습니다.</p>
+        </div>
+        <div class="ts-col">
+          <div class="cl">해결 과정</div>
+          <ul>
+            <li>단계별 재처리 단위 정의 — 파싱은 오류 시 플래그 파일로 1회만 자동 재요청, 추출은 문서 1건 = Celery 태스크 1개로 실패 문서만 자동 재시도, 필터링은 사용자가 재매핑한 대표보종명만 부분 재실행</li>
+            <li>버전별 중간 결과 파일과 문서·단계별 처리 상태를 남겨, 재실행 시 성공한 단계의 결과를 재사용</li>
+            <li>필터링 부분 재실행 시 해당 범위의 기존 DB 데이터를 삭제한 뒤 다시 적재해 멱등성 확보</li>
+          </ul>
+        </div>
+        <div class="ts-col result">
+          <div class="cl">결과</div>
+          <ul>
+            <li>재처리 범위를 실패·수정 구간으로 한정해 성공한 파싱·LLM 추론 결과를 재사용</li>
+            <li>필터링을 여러 번 재실행해도 결과가 중복 적재되지 않는 구조 확보</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- 04 주요 성과 -->
   <section id="achievements">
     <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">주요 성과</h2></div>
+    <p class="sec-desc">업무 기간·업무량·정확도는 팀 전체가 함께 만든 프로젝트 성과이고, 적재 요청 단위는 제가 담당한 파이프라인 영역의 개선입니다.</p>
 
     <div class="stat-grid">
       <div class="stat-card">
-        <div class="num">100%</div>
-        <div class="stat-label">문서 구조화 · 속성 추출 정확도</div>
-        <div class="stat-desc">기초서류 문서 구조화 및 상품 속성정보 추출 정확도가 거의 완전한 수준에 도달했습니다.</div>
-      </div>
-      <div class="stat-card">
-        <div class="num">~10초</div>
-        <div class="stat-label">문서 1건당 처리 속도</div>
-        <div class="stat-desc">병렬 Worker 구조와 단계 분리를 통해 확보한 처리 속도입니다.</div>
-      </div>
-      <div class="stat-card">
         <div class="num">35일 → 9일</div>
-        <div class="stat-label">업무 기간 단축</div>
+        <div class="stat-label">업무 기간 단축 (프로젝트 전체)</div>
         <div class="stat-desc">보기·납기 반영에 걸리던 업무 기간을 약 26일 줄였습니다.</div>
       </div>
       <div class="stat-card">
         <div class="num">75%</div>
-        <div class="stat-label">수작업 업무량 감소</div>
+        <div class="stat-label">수작업 업무량 감소 (프로젝트 전체)</div>
         <div class="stat-desc">업무 기간 단축과 함께 반복적인 수작업 입력 부담을 크게 줄였습니다.</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">≈100%</div>
+        <div class="stat-label">구조화 · 속성 추출 정확도 (프로젝트 전체)</div>
+        <div class="stat-desc">기초서류 문서 구조화 및 상품 속성정보 추출 정확도가 100%에 가까운 수준에 도달했습니다.</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">1000행 / 1회</div>
+        <div class="stat-label">DB 적재 요청 단위</div>
+        <div class="stat-desc">행마다 보내던 적재 요청을 1000행 단위 배치 요청으로 전환했습니다.</div>
       </div>
     </div>
 
@@ -298,22 +317,22 @@
       <div class="ach-item">
         <div class="ach-idx">01</div>
         <div class="ach-text">
-          <p class="lead">End-to-end 자동화 파이프라인을 5개월 내 프로덕션 수준으로 구축</p>
-          <p>MCP 연동 → 문서 구조화 → 정보 추출 → 코드 매핑까지, 사람 개입 없이 흐르는 파이프라인을 완성해 PF 시스템에 보기·납기 정보를 자동 반영했습니다.</p>
+          <p class="lead">문서 구조화부터 DB 적재까지 이어지는 비동기 파이프라인 구축</p>
+          <p>솔루션 위에 커스텀 개발한 문서 구조화부터 정보 추출, 코드매핑·필터링, 결과 DB 적재까지를 서비스 간 API와 단계별 Queue/Worker로 연결했습니다. 자동 매칭의 신뢰도가 낮은 결과는 사용자가 재매핑하고 해당 부분만 다시 처리하는 흐름도 함께 연결했습니다.</p>
         </div>
       </div>
       <div class="ach-item">
         <div class="ach-idx">02</div>
         <div class="ach-text">
-          <p class="lead">단계별 Queue/Worker 분리로 운영 안정성 확보</p>
-          <p>특정 단계의 지연·실패가 전체 처리에 전이되지 않는 구조를 확보해, 대량 문서를 처리하는 환경에서도 안정적으로 운영할 수 있게 되었습니다.</p>
+          <p class="lead">장시간 처리 분리로 API 안정성 확보</p>
+          <p>LLM 추론과 매칭 같은 장시간 처리를 Worker로 옮겨 HTTP 요청이 처리 완료를 기다리지 않도록 했고, 일부 문서의 실패가 배치 전체를 멈추지 않는 구조를 만들었습니다.</p>
         </div>
       </div>
       <div class="ach-item">
         <div class="ach-idx">03</div>
         <div class="ach-text">
-          <p class="lead">정확도와 운영 안정성을 함께 고려한 설계 적용</p>
-          <p>Redis 기반 Barrier 동기화, 상태 기반 재처리, F1 유사도 기반 매핑 + human-in-the-loop 등 각 단계에서 자동화 효율과 신뢰성의 균형을 맞췄습니다.</p>
+          <p class="lead">재시도가 일상인 환경을 전제로 한 설계</p>
+          <p>DB 상태 기반 완료 판정으로 재시도에 따른 중복 집계를, Redis HSETNX로 동시 완료 시 중복 호출을, Filtering 부분 재실행의 삭제 후 재적재로 중복 적재를 막도록 설계했습니다.</p>
         </div>
       </div>
     </div>
@@ -324,21 +343,21 @@
     <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">회고 · 배운 점</h2></div>
 
     <blockquote class="retro">
-      LLM을 파이프라인의 한 컴포넌트로 다룰 때는 호출 자체보다 그 앞뒤 — 입력 정규화, 출력 검증·재시도, 동시성 제어 — 를 얼마나 견고하게 설계하느냐가 실제 운영 가능 여부를 좌우한다는 것을 이 프로젝트를 통해 확인했습니다.
+      LLM을 파이프라인의 한 컴포넌트로 다룰 때는 호출 자체보다 그 앞뒤 — 처리 흐름의 분리, 완료 시점 판단, 실패와 재시도 처리 — 를 얼마나 견고하게 설계하느냐가 실제 운영 가능 여부를 좌우한다는 것을 이 프로젝트를 통해 확인했습니다.
     </blockquote>
 
     <div class="takeaways">
       <div class="takeaway">
         <div class="tk-label">배움 01</div>
-        <p>LLM은 정확도가 아니라 재현성과 실패 처리로 신뢰를 얻는다. temperature/seed 고정, 이상 패턴 감지, 다층 재시도가 모델 성능보다 운영 안정성에 더 크게 기여했습니다.</p>
+        <p>재시도가 있는 시스템에서는 "몇 번 실행됐는가"가 아니라 "지금 어떤 상태인가"로 판단해야 한다. Redis 카운터로 완료를 세다가 재시도 때문에 중복 집계되는 문제를 겪고, 판정 기준을 DB 상태로 옮기면서 멱등성의 의미를 체감했습니다.</p>
       </div>
       <div class="takeaway">
         <div class="tk-label">배움 02</div>
-        <p>완전 자동화가 어려운 문제는 피하지 않고 경계를 긋는다. 표기 차이 매칭처럼 100% 자동화가 어려운 영역은, 임계값 기반으로 자동 처리와 사람의 개입을 나누는 human-in-the-loop 설계가 정확도를 희생하지 않으면서 자동화 효과를 얻는 현실적인 접근이라는 것을 체감했습니다.</p>
+        <p>동시성 문제는 "확인하고 쓰기"를 한 동작으로 만드는 데서 풀린다. 확인과 기록 사이의 짧은 틈이 중복 실행을 만든다는 것을 겪고, 원자 연산 하나로 실행 권한을 확정하는 방식으로 해결했습니다.</p>
       </div>
       <div class="takeaway">
         <div class="tk-label">배움 03</div>
-        <p>비동기 파이프라인의 신뢰성은 코드보다 상태 설계에서 나온다. 문서 단위 처리 상태를 명확히 관리하고 단계를 분리하니, 장애 대응뿐 아니라 이슈 공유·커뮤니케이션도 훨씬 단순해졌습니다.</p>
+        <p>비동기 파이프라인의 신뢰성은 코드보다 상태 설계에서 나온다. 문서·단계별 처리 상태와 중간 결과를 명확히 남기니, 재처리 범위를 좁힐 수 있었고 장애 대응과 이슈 공유·커뮤니케이션도 훨씬 단순해졌습니다.</p>
       </div>
     </div>
   </section>
